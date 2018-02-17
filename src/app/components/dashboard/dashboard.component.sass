@@ -1,0 +1,93 @@
+.addLog
+  padding: 1rem
+  width: 30rem
+  background: #9f2424
+  margin: 2rem auto
+  form
+    p
+      display: flex;
+      justify-content: space-evenly;  
+    input
+      margin-bottom: 1rem
+.logs
+  display: flex
+  flex-flow: wrap
+  padding: 2rem
+  width: 100%
+  justify-content: center
+  .log
+    padding: 1rem
+    background: #adc9d757
+    margin-right: 2rem
+    margin-bottom: 1rem
+    max-width: 30rem
+    min-width: 18rem
+    .log-title
+      display: flex
+      justify-content: space-between
+      margin-bottom: 1rem
+      margin: -1rem -1rem 1rem -1rem
+      background: #9f2424
+      color: white
+      padding: 1rem
+    .text
+      line-height: 120%
+      margin-top: 0.5rem
+.personal
+  background: #0e82df !important
+
+.confirm-delete
+  position: fixed
+  background: rgba(0, 0, 0, 0.74)
+  width: 100%
+  top: 0
+  height: 100vh
+  color: white
+  text-align: center
+  padding: 5rem
+  font-weight: bold
+  z-index: 1
+
+
+
+.checkboxThree
+  width: 180px
+  height: 40px
+  background: #333
+  margin: 1rem auto 2rem
+  border-radius: 50px
+  position: relative
+  &:before
+    content: 'Personal'
+    position: absolute
+    top: 12px
+    left: 13px
+    height: 2px
+    color: #26ca28
+    font-size: 16px
+  &:after
+    content: 'Work'
+    position: absolute
+    top: 12px
+    left: 113px
+    height: 2px
+    color: white
+    font-size: 16px
+  label
+    display: block
+    width: 80px
+    height: 22px
+    border-radius: 50px
+    transition: all .5s ease
+    cursor: pointer
+    position: absolute
+    top: 9px
+    z-index: 1
+    left: 12px
+    background: #ddd
+  input[type=checkbox]:checked + label
+    left: 80px
+    background: #26ca28
+
+input[type=checkbox]
+  visibility: hidden    

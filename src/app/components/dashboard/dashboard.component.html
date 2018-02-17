@@ -1,0 +1,41 @@
+<div class="container">
+  <p>Today is {{today | date}}</p>
+  <p>Week: {{today | week }}</p>
+  <div class="addLog">
+    <form #f="ngForm" (ngSubmit)="onSubmitAddLog(f)">
+      <div class="checkboxThree">
+        <input type="checkbox" ngModel name="personal" id="checkboxThreeInput"/>
+        <label for="checkboxThreeInput">
+        </label>
+      </div>
+      <p>
+        <label>Week:</label>
+        <input type="text" [ngModel] name="week" placeholder="{{today | week }}" required>
+      </p>
+      <p>
+        <label>Day:</label>
+        <input type="text" ngModel name="day" placeholder="{{today | date:'EEEE' }}">
+      </p>
+      <p>
+        <label>Text:</label>
+        <textarea type="text" ngModel name="text"></textarea>
+      </p>
+        <button type="submit" [disabled]="!f.valid">Submit</button>
+    </form>
+  </div>
+  <div class="logs">
+    <div class="log" *ngFor="let log of logs; let i = index">
+      <div class="log-title" [ngClass]="getClass(log)">
+        <p>Week: {{log.week}}</p>
+        <p>{{log.type}}</p>
+      </div>
+      <p>Day: {{log.day}}</p>
+      <p class="text">Text: {{log.text}}</p>
+      <button type="button" (click)="initDelete(i)">X</button>
+    </div>
+  </div>
+  <div *ngIf="showConfirmDelete" class="confirm-delete">Do you really want to delete this log?
+    <button type="button" (click)="deleteLog(i)">DELETE</button>
+    <button type="button" (click)="this.showConfirmDelete = false">CANCEL</button>
+  </div>
+</div>
