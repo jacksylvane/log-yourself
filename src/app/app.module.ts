@@ -6,6 +6,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 
+import { HttpModule } from '@angular/http';
+import { LogsService } from './services/logs.service';
+
 import { WeekPipe } from './pipes/week.pipe';
 
 
@@ -18,9 +21,10 @@ import { WeekPipe } from './pipes/week.pipe';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpModule
   ],
-  providers: [],
+  providers: [LogsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

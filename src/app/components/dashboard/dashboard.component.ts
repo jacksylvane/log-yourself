@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { LogsService } from '../../services/logs.service';
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -12,20 +14,27 @@ export class DashboardComponent implements OnInit {
     type: string,
     text: string,
   };
-  logs: {}[];
+  logs: Array<any>;
   showConfirmDelete = false;
   logToDelete: number;
 
-  constructor() { }
+  constructor(private _logsService: LogsService) {
+
+    // Access the Data Service's getUsers() method we defined
+    this._logsService.getUsers()
+      .subscribe(res => this.logs = res);
+  }
 
 /* Submits a new log */
    onSubmitAddLog(f) {
     let type = 'work';
     type = f.value.personal ? 'personal' : 'work' ;
-     this.log = {
-       week: f.value.week, day: f.value.day , type: type, text : 'some text'};
+    this.log = {
+     // tslint:disable-next-line:radix
+     week: parseInt(f.value.week), day: f.value.day, type: type, text: f.value.text};
     this.logs.unshift(this.log);
     console.log(this.logs);
+     this._logsService.insertLog(this.log);
   }
 
 /* Determines color of card header based on type of a log */
@@ -47,10 +56,12 @@ initDelete(i) {
   deleteLog() {
     this.logs.splice(this.logToDelete, 1);
     this.showConfirmDelete = false;
+    let id = { "week": 105 };
+    this._logsService.deleteLog(id);
   }
 
   ngOnInit() {
-    this.logs = [
+    /* this.logs = [
       {
       week: '01',
       day: '07',
@@ -75,7 +86,7 @@ initDelete(i) {
       type: 'personal',
       text: 'true bro',
       },
-  ];
+  ]; */
     console.log(this.logs);
   }
 
