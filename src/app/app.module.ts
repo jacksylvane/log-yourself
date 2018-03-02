@@ -10,13 +10,15 @@ import { HttpModule } from '@angular/http';
 import { LogsService } from './services/logs.service';
 
 import { WeekPipe } from './pipes/week.pipe';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    WeekPipe
+    WeekPipe,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

@@ -19,9 +19,27 @@ let response = {
   message: null
 };
 
-// Get users
+// Get all logs
 router.get('/logs', (req, res) => {
   db.logs.find().sort({ "week": 1 }, (err, users) => {
+    if (err) return next(err);
+    response.data = users;
+    res.json(response);
+  });
+});
+
+// Get Work Logs
+router.get('/logs/work', (req, res) => {
+  db.logs.find({ "type": "work" }).sort({ "week": 1 }, (err, users) => {
+    if (err) return next(err);
+    response.data = users;
+    res.json(response);
+  });
+});
+
+// Get Personal Logs
+router.get('/logs/personal', (req, res) => {
+  db.logs.find({ "type": "personal" }).sort({ "week": 1 }, (err, users) => {
     if (err) return next(err);
     response.data = users;
     res.json(response);
@@ -38,12 +56,14 @@ router.post('/log', (req, res) => {
 });
 
 // Delete log
-router.post('/delete', (req, res) => {
-  console.log(req.body);
-  db.logs.remove(req.body, (err, users) => {
+router.post('/delete/:id', (req, res) => {
+  console.log(req.params.id);
+  db.logs.remove({
+    _id: mongojs.ObjectId(req.params.id)}, (err, users) => {
     if (err) return next(err);
     response.data = users;
     res.json(response);
+    console.log(response);
   });
 });
 

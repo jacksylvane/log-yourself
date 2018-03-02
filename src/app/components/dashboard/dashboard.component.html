@@ -1,26 +1,33 @@
+<app-navbar></app-navbar>
 <div class="container">
-  <p>Today is {{today | date}}</p>
-  <p>Week: {{today | week }}</p>
-  <div class="addLog">
+  <button (click)="getAllLogs()">All</button>
+  <button (click)="showWorkLogs()">Work</button>
+  <button (click)="showPersonalLogs()">Personal</button>
+  <div class="addLog card">
+    <div class="addLog-header card-header"> Add entry</div>
     <form #f="ngForm" (ngSubmit)="onSubmitAddLog(f)">
-      <div class="checkboxThree">
-        <input type="checkbox" ngModel name="personal" id="checkboxThreeInput"/>
-        <label for="checkboxThreeInput">
-        </label>
+      <div class="type">
+        Type:
+        <div class="checkboxThree">
+          <input type="checkbox" ngModel name="personal" id="checkboxThreeInput"/>
+          <label for="checkboxThreeInput">
+          </label>
+        </div>
       </div>
-      <p>
-        <label>Week:</label>
-        <input type="text" [ngModel] name="week" placeholder="{{today | week }}" required>
-      </p>
-      <p>
-        <label>Day:</label>
-        <input type="text" ngModel name="day" placeholder="{{today | date:'EEEE' }}">
-      </p>
-      <p>
-        <label>Text:</label>
+      <div class="date">
+        <div>
+          <label>Week:</label>
+          <input type="text" [ngModel] name="week" placeholder="{{today | week }}" required>
+        </div>
+        <div>
+          <label>Day:</label>
+          <input type="text" ngModel name="day" placeholder="{{today | date:'EEEE' }}">
+        </div>
+      </div>
+      <div>
         <textarea type="text" ngModel name="text"></textarea>
-      </p>
-        <button type="submit" [disabled]="!f.valid">Submit</button>
+      </div>
+        <button type="submit" class="btn" [disabled]="!f.valid">Submit</button>
     </form>
   </div>
   <div class="logs">
@@ -31,11 +38,11 @@
       </div>
       <p>Day: {{log.day}}</p>
       <p class="text">Text: {{log.text}}</p>
-      <button type="button" (click)="initDelete(i)">X</button>
+      <button type="button" (click)="initDelete(i, log._id)">X</button>
     </div>
   </div>
   <div *ngIf="showConfirmDelete" class="confirm-delete">Do you really want to delete this log?
-    <button type="button" (click)="deleteLog(i)">DELETE</button>
+    <button type="button" (click)="deleteLog(i, id)">DELETE</button>
     <button type="button" (click)="this.showConfirmDelete = false">CANCEL</button>
   </div>
 </div>

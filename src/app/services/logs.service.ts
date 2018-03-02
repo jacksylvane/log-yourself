@@ -6,11 +6,19 @@ import 'rxjs/add/operator/map';
 export class LogsService {
 
   result: any;
-
+  deletedCount: number;
   constructor(private _http: Http) { }
 
   getUsers() {
     return this._http.get('/api/logs')
+      .map(result => this.result = result.json().data);
+  }
+  getWorkLogs() {
+    return this._http.get('/api/logs/work')
+      .map(result => this.result = result.json().data);
+  }
+  getPersonalLogs() {
+    return this._http.get('/api/logs/personal')
       .map(result => this.result = result.json().data);
   }
 
@@ -25,9 +33,10 @@ export class LogsService {
         });
     });
   }
+// Should switch do DELETE request? Post asks two parameters?
   deleteLog(id) {
     return new Promise((resolve, reject) => {
-      this._http.post('/api/delete', id)
+      this._http.post('/api/delete/' + id , id)
         .map(res => res.json())
         .subscribe(res => {
           resolve(res);

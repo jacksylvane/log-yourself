@@ -1,14 +1,70 @@
+.card
+  box-shadow: 0px 2px 8px 0px rgba(162, 161, 161, 0.42)
+  .card-header
+    width: calc(100% + 3.5rem)
+    background: linear-gradient(#2F9173, #3f9c80)
+    box-shadow: 0px 2px 8px 0px rgba(162, 161, 161, 0.42)
+    margin: -1rem -1.75rem
+    margin-bottom: 2rem
+    padding: 1.35rem
+    border-radius: 3px 3px 0 0
+    color: #fff
+    font-size: 1.25rem
+    font-weight: lighter
+.btn
+  border: none
+  background: #67B29B
+  font-weight: bold
+  padding: .75rem 2rem
+  border-radius: 3px
+  border-bottom: 2px solid #549B85   
+  text-transform: uppercase
+  color: #fff
+  box-shadow: 0 2px 8px 0px rgba(21, 20, 20, 0.17)
+  &:hover
+    cursor: pointer
+    border-bottom: none
+    margin-bottom: 2px
+    background: #49987c
+    box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.08)  
+    transition: margin-bottom 1s   
 .addLog
-  padding: 1rem
-  width: 30rem
-  background: #9f2424
+  padding: 1rem 1.75rem
+  width: 35rem
+  background: #F0F0F0
+  border-radius: 3px
   margin: 2rem auto
   form
+    color: var(--black)
+    .type
+      display: inline-flex
+      justify-content: space-evenly
+      width: 100%
+      align-items: center
+      margin-bottom: 2rem
+    .date
+      display: inline-flex
+      justify-content: space-around
+      width: 100%
+      margin-bottom: 1rem
     p
       display: flex;
       justify-content: space-evenly;  
     input
       margin-bottom: 1rem
+    textarea
+      width: 100%
+      min-height: 15rem
+      padding: 0.5rem 0.75rem
+      line-height: 170%
+      font-family: "Open Sans"
+      margin: 0 0 2rem
+      border-radius: 2px
+      border: none
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.14) 
+      &:focus
+        outline: none
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.14) 
 .logs
   display: flex
   flex-flow: wrap
@@ -33,6 +89,7 @@
     .text
       line-height: 120%
       margin-top: 0.5rem
+      white-space: pre-wrap
 .personal
   background: #0e82df !important
 
@@ -54,7 +111,6 @@
   width: 180px
   height: 40px
   background: #333
-  margin: 1rem auto 2rem
   border-radius: 50px
   position: relative
   &:before
