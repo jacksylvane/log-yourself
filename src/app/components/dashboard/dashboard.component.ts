@@ -1,13 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { LogsService } from '../../services/logs.service';
+import { easeInOut } from '../../animations';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.sass']
+  styleUrls: ['./dashboard.component.sass'],
+  animations: [
+    easeInOut
+  ]
 })
 export class DashboardComponent implements OnInit {
+  today = Date.now();
+  formSuccesfullySubmited = false;
   log: {
+    week: number,
+    day: number,
+    type: string,
+    text: string,
+    typeInitial: string
+  };
+  newLog: {
     week: number,
     day: number,
     type: string,
@@ -25,7 +38,20 @@ export class DashboardComponent implements OnInit {
 
   getAllLogs() {
     this._logsService.getUsers()
-      .subscribe(res => this.logs = res);
+      .subscribe((res) => {
+        this.logs = res;
+        console.log(this.logs);
+        this.logs.forEach(function (obj) {
+          if (obj.type === 'work') {
+            obj.typeInitial = 'W';
+          } else {
+            obj.typeInitial = 'P';
+          }
+        });
+      });
+    /* for (let index = 0; index < this.logs.length; index++) {
+        this.logs[index];
+      } */
   }
   showWorkLogs() {
     this._logsService.getWorkLogs()
@@ -41,13 +67,26 @@ export class DashboardComponent implements OnInit {
    onSubmitAddLog(f) {
     let type = 'work';
     type = f.value.personal ? 'personal' : 'work' ;
-    this.log = {
+    this.newLog = {
      // tslint:disable-next-line:radix
      week: parseInt(f.value.week), day: f.value.day, type: type, text: f.value.text};
-     this._logsService.insertLog(this.log);
+     console.log(this.newLog);
+     this._logsService.insertLog(this.newLog);
      console.log(this.logs);
      this._logsService.getUsers()
-       .subscribe(res => this.logs = res);
+       .subscribe((res) => {
+         this.logs = res;
+         console.log(this.logs);
+         this.logs.forEach(function (obj) {
+           if (obj.type === 'work') {
+             obj.typeInitial = 'W';
+           } else {
+             obj.typeInitial = 'P';
+           }
+         });
+       });
+    // this.formSuccesfullySubmited = true;
+    //  setTimeout(() => this.formSuccesfullySubmited = false, 3000);
   }
 
 /* Determines color of card header based on type of a log */

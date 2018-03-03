@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { Pipe, PipeTransform } from '@angular/core';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpModule } from '@angular/http';
 import { LogsService } from './services/logs.service';
 
@@ -24,7 +24,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    BrowserAnimationsModule
   ],
   providers: [LogsService],
   bootstrap: [AppComponent]

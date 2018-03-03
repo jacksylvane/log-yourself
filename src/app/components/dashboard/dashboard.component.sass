@@ -1,3 +1,9 @@
+.container
+  display: grid
+  grid-template-columns: repeat(6, 1fr)
+  grid-template-row: repeat(4, 1fr)
+  grid-gap: 2.5rem
+  padding: 0 3rem
 .card
   box-shadow: 0px 2px 8px 0px rgba(162, 161, 161, 0.42)
   .card-header
@@ -6,7 +12,7 @@
     box-shadow: 0px 2px 8px 0px rgba(162, 161, 161, 0.42)
     margin: -1rem -1.75rem
     margin-bottom: 2rem
-    padding: 1.35rem
+    padding: 1.2rem 1.35rem
     border-radius: 3px 3px 0 0
     color: #fff
     font-size: 1.25rem
@@ -23,75 +29,140 @@
   box-shadow: 0 2px 8px 0px rgba(21, 20, 20, 0.17)
   &:hover
     cursor: pointer
-    border-bottom: none
-    margin-bottom: 2px
+    border-bottom: 2px solid transparent
     background: #49987c
     box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.08)  
-    transition: margin-bottom 1s   
+    transition: all .2s ease 
 .addLog
   padding: 1rem 1.75rem
-  width: 35rem
+  grid-column: span 2
+  grid-row: span 1
   background: #F0F0F0
   border-radius: 3px
   margin: 2rem auto
   form
     color: var(--black)
-    .type
-      display: inline-flex
-      justify-content: space-evenly
-      width: 100%
-      align-items: center
-      margin-bottom: 2rem
-    .date
-      display: inline-flex
-      justify-content: space-around
-      width: 100%
-      margin-bottom: 1rem
-    p
-      display: flex;
-      justify-content: space-evenly;  
-    input
-      margin-bottom: 1rem
-    textarea
-      width: 100%
-      min-height: 15rem
-      padding: 0.5rem 0.75rem
-      line-height: 170%
-      font-family: "Open Sans"
-      margin: 0 0 2rem
-      border-radius: 2px
-      border: none
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.14) 
-      &:focus
-        outline: none
-        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.14) 
+    #inputsContainer
+      width: 95%
+      margin: 0 auto
+      .type
+        display: inline-flex
+        justify-content: space-between
+        width: 69%
+        align-items: center
+        margin-bottom: 2rem
+      .date
+        display: inline-flex
+        justify-content: space-between
+        width: 100%
+        margin-bottom: 1rem
+        div
+          label
+            margin-right: 1rem
+          input
+            height: 1rem
+            padding: 1rem 0.5rem
+            border: none
+            width: 4rem
+            text-align: center
+            font-weight: 700
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03)
+            border-radius: 2px 
+            font-family: Open Sans
+            color: var(--black)
+            &:focus
+              outline: none
+              box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) 
+        &>:nth-child(2)
+          input    
+            width: 10rem
+      p
+        display: flex;
+        justify-content: space-evenly;  
+      input
+        margin-bottom: 1rem
+    .textInput
+      display: flex  
+      textarea
+        width: 95%
+        min-height: 15rem
+        padding: 0.5rem 0.75rem
+        line-height: 170%
+        font-family: "Open Sans"
+        margin: 0 auto 2rem auto
+        border-radius: 2px
+        border: none
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.10) 
+        &:focus
+          width: 97%
+          outline: none
+          box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.10)
+          min-height: 15.2rem
+          transition: all .4s ease
+    .btn-div
+      display: flex
+      justify-content: flex-end   
 .logs
   display: flex
   flex-flow: wrap
-  padding: 2rem
-  width: 100%
+  grid-column: span 4
+  grid-row: span 2
+  max-width: 65rem
   justify-content: center
-  .log
-    padding: 1rem
-    background: #adc9d757
-    margin-right: 2rem
-    margin-bottom: 1rem
-    max-width: 30rem
-    min-width: 18rem
-    .log-title
-      display: flex
-      justify-content: space-between
-      margin-bottom: 1rem
-      margin: -1rem -1rem 1rem -1rem
-      background: #9f2424
-      color: white
-      padding: 1rem
-    .text
-      line-height: 120%
-      margin-top: 0.5rem
-      white-space: pre-wrap
+  padding: 1rem 1.75rem
+  background: #F0F0F0
+  border-radius: 3px
+  margin: 2rem auto
+  .entriesCards
+    width: 100%
+    display: flex
+    flex-wrap: wrap
+    justify-content: space-between  
+    .log
+      position: relative
+      padding: 1.5rem
+      background: #31AB85
+      margin: 0 0.75rem 3rem 0.75rem
+      width: 15rem
+      height: 10rem
+      border-radius: 3px
+      box-shadow: 0 2px 8px 0 rgba(128, 128, 128, 0.31)
+      font-family: Roboto
+      font-weight: 300
+      h3
+        font-size: 1.35rem
+        margin-bottom: 0.75rem
+        font-weight: 500
+      h4
+        position: absolute
+        top: 1.5rem  
+        right: 1.5rem
+        font-weight: 500
+      p
+        font-size: 0.9rem
+        margin-top: 0.9rem  
+      .entriesCount
+        margin-top: 2.3rem
+        font-size: 0.9rem
+        display: inline-flex
+        justify-content: space-between
+        width: 100%
+      .log-title
+        display: flex
+        justify-content: space-between
+        margin-bottom: 1rem
+        margin: -1rem -1rem 1rem -1rem
+        background: #9f2424
+        color: white
+        padding: 1rem
+      .text
+        line-height: 120%
+        margin-top: 0.5rem
+        white-space: pre-wrap
 .personal
-  background: #0e82df !important
+  background: #44b98c !important
+.work
+  background: #267e5e !important
 
 .confirm-delete
   position: fixed
@@ -110,8 +181,8 @@
 .checkboxThree
   width: 180px
   height: 40px
-  background: #333
-  border-radius: 50px
+  background: linear-gradient(#2f9173, #3e9b7f)
+  border-radius: 10px
   position: relative
   &:before
     content: 'Personal'
@@ -119,8 +190,8 @@
     top: 12px
     left: 13px
     height: 2px
-    color: #26ca28
     font-size: 16px
+    color: #26cab1
   &:after
     content: 'Work'
     position: absolute
@@ -133,17 +204,27 @@
     display: block
     width: 80px
     height: 22px
-    border-radius: 50px
+    border-radius: 5px
     transition: all .5s ease
     cursor: pointer
     position: absolute
     top: 9px
     z-index: 1
     left: 12px
-    background: #ddd
+    background: #fff
+    box-shadow: 0 2px 1px 0px rgba(0, 0, 0, 0.18)
   input[type=checkbox]:checked + label
-    left: 80px
-    background: #26ca28
+    left: 87px
+    background: #26cab1
 
 input[type=checkbox]
-  visibility: hidden    
+  visibility: hidden   
+
+.alert
+  position: fixed;
+  background: rgba(55, 151, 122, 0.95);
+  right: 0;
+  bottom: 3rem;
+  padding: 1.5rem 1.5rem;
+  border-radius: 3px 0 0 3px;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.49);   
