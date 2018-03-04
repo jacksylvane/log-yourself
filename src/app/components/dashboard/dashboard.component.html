@@ -42,12 +42,15 @@
           <p>{{log.type}}</p>
         </div> -->
         <h3>Week: {{log.week}}</h3>
-        <h4>{{log.typeInitial}}</h4>
-        <p>17.2 - 24.2</p>
+        <h4>{{log.type}}</h4>
+        <p>{{log.weekStart | date:'dd.MM'}} - {{log.weekEnd | date:'dd.MM'}}</p>
         <div class="entriesCount">
           <span>1 week entry</span>
-          <span>2 daily entries</span>
+          <span>{{log.dayEntries}} daily entries</span>
         </div>
+    <!--     <div>
+           {{log.days[0].text}}
+        </div> -->
         <!-- <button type="button" (click)="initDelete(i, log._id)">X</button> -->
       </div>
     </div>  

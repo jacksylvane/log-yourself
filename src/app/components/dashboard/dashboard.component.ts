@@ -18,13 +18,14 @@ export class DashboardComponent implements OnInit {
     day: number,
     type: string,
     text: string,
-    typeInitial: string
+    weekStart: any,
+    weekEnd: any
   };
   newLog: {
     week: number,
-    day: number,
     type: string,
     text: string,
+    days: Array<object>
   };
   logs: Array<any>;
   showConfirmDelete = false;
@@ -32,26 +33,43 @@ export class DashboardComponent implements OnInit {
   logToDeleteId: number;
 
   constructor(private _logsService: LogsService) {
-    // Access the Data Service's getUsers() method we defined
+    // Access the Data Service's getAllLogs() method we defined
     this.getAllLogs();
   }
 
+  getDateOfWeek(w, y) {
+    const d = (1 + (w - 1) * 7); // 1st of January + 7 days for each week
+    return new Date(y, 0, d);
+  }
+  getEndingDateOfWeek(w, y) {
+    const d = ((1 + (w - 1) * 7)) + 6; // func  getDateOfWeek + 6 days
+    return new Date(y, 0, d);
+  }
+
   getAllLogs() {
-    this._logsService.getUsers()
+    this._logsService.getAllLogs()
       .subscribe((res) => {
         this.logs = res;
-        console.log(this.logs);
-        this.logs.forEach(function (obj) {
+        for (let i = 0; i < this.logs.length; i++) {
+          this.logs[i].weekStart = this.getDateOfWeek(this.logs[i].week, 2017);
+          this.logs[i].weekEnd = this.getEndingDateOfWeek(this.logs[i].week, 2017);
+          if ('days' in this.logs[i]) {
+            this.logs[i].dayEntries = this.logs[i].days.length;
+          } else {
+            this.logs[i].dayEntries = 0;
+          /*   const text = { 'text': 'hee' };
+            this.logs[i].days = new Array(text); */
+          }
+        }
+  /*       this.logs.forEach(function (obj) {
           if (obj.type === 'work') {
             obj.typeInitial = 'W';
           } else {
             obj.typeInitial = 'P';
           }
-        });
+        }); */
+        console.log(this.logs);
       });
-    /* for (let index = 0; index < this.logs.length; index++) {
-        this.logs[index];
-      } */
   }
   showWorkLogs() {
     this._logsService.getWorkLogs()
@@ -67,26 +85,27 @@ export class DashboardComponent implements OnInit {
    onSubmitAddLog(f) {
     let type = 'work';
     type = f.value.personal ? 'personal' : 'work' ;
-    this.newLog = {
-     // tslint:disable-next-line:radix
-     week: parseInt(f.value.week), day: f.value.day, type: type, text: f.value.text};
-     console.log(this.newLog);
-     this._logsService.insertLog(this.newLog);
-     console.log(this.logs);
-     this._logsService.getUsers()
-       .subscribe((res) => {
-         this.logs = res;
-         console.log(this.logs);
-         this.logs.forEach(function (obj) {
-           if (obj.type === 'work') {
-             obj.typeInitial = 'W';
-           } else {
-             obj.typeInitial = 'P';
-           }
-         });
-       });
-    // this.formSuccesfullySubmited = true;
-    //  setTimeout(() => this.formSuccesfullySubmited = false, 3000);
+    if (f.value.day !== '') {
+      this.newLog = {
+        week: parseInt(f.value.week, 10),
+        type: type,
+        text: '',
+        days: [{'day' : f.value.day, 'text': f.value.text}]
+      };
+    } else {
+      this.newLog = {
+       week: parseInt(f.value.week, 10),
+             type: type,
+             text: f.value.text,
+             days: []
+            };
+    }
+    console.log(this.newLog);
+    this._logsService.insertLog(this.newLog);
+    console.log(this.logs);
+    this.getAllLogs();
+    this.formSuccesfullySubmited = true;
+    setTimeout(() => this.formSuccesfullySubmited = false, 3000);
   }
 
 /* Determines color of card header based on type of a log */

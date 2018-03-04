@@ -9,7 +9,7 @@ export class LogsService {
   deletedCount: number;
   constructor(private _http: Http) { }
 
-  getUsers() {
+  getAllLogs() {
     return this._http.get('/api/logs')
       .map(result => this.result = result.json().data);
   }
