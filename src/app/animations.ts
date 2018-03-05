@@ -28,6 +28,31 @@ export const easeInOut =
       }))
     ])
   ]);
+export const expandCard =
+  trigger('expandCard', [
+    transition(':enter', [
+      style({
+        opacity: 0,
+        right: '-15rem',
+        transform: 'skewX(-12deg)'
+      }),
+      animate('0.5s ease-in-out', style({
+        opacity: 1,
+        right: '0rem',
+        transform: 'skewX(0)'
+      }))
+    ]),
+    transition(':leave', [
+      style({
+        opacity: 1,
+        display: 'none',
+      }),
+      animate('.1s ease-in-out', style({
+        opacity: 0,
+        display: 'none'
+      }))
+    ])
+  ]);
 export const itemAnimTrigger =
   trigger('itemAnim', [
     state('default', style({

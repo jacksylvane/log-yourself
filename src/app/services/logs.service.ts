@@ -45,4 +45,16 @@ export class LogsService {
         });
     });
   }
+
+  updateLog(logToUpdate) {
+    return new Promise((resolve, reject) => {
+      this._http.put('/api/update/' + logToUpdate._id, logToUpdate)
+        .map(res => res.json())
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
 }

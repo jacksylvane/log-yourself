@@ -37,7 +37,11 @@
   <div class="card logs">
     <div class="logs-header card-header"> Your weekly logs</div>
     <div class="entriesCards">
-      <div class="log" *ngFor="let log of logs; let i = index" [ngClass]="getClass(log)">
+      <div class="log"
+       *ngFor="let log of logs; let i = index" 
+       [ngClass]="getClass(log)"
+       [class.expand]="this.logs[i].showText"
+       (click)="this.logs[i].showText = !this.logs[i].showText;">
         <!-- <div class="log-title" [ngClass]="getClass(log)">
           <p>{{log.type}}</p>
         </div> -->
@@ -45,12 +49,12 @@
         <h4>{{log.type}}</h4>
         <p>{{log.weekStart | date:'dd.MM'}} - {{log.weekEnd | date:'dd.MM'}}</p>
         <div class="entriesCount">
-          <span>1 week entry</span>
+          <span>{{log.weekEntries}} week entry</span>
           <span>{{log.dayEntries}} daily entries</span>
         </div>
-    <!--     <div>
-           {{log.days[0].text}}
-        </div> -->
+        <div *ngIf="log.showText" class="text" @expandCard> 
+           {{log.text}}
+        </div>
         <!-- <button type="button" (click)="initDelete(i, log._id)">X</button> -->
       </div>
     </div>  

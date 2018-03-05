@@ -19,6 +19,11 @@ let response = {
   message: null
 };
 
+let testResponse = {
+  status: 200,
+  data: "ok"
+};
+
 // Get all logs
 router.get('/logs', (req, res) => {
   db.logs.find().sort({ "week": 1 }, (err, users) => {
@@ -64,6 +69,26 @@ router.post('/delete/:id', (req, res) => {
     response.data = users;
     res.json(response);
     console.log(response);
+  });
+});
+
+// Update log
+router.put('/update/:id', (req, body, res) => {
+  console.log(req.params.id, req.body);
+  const bodyToUpdate = {
+    '_id': mongojs.ObjectId(req.params.id),
+    'week': req.body.week,
+    'type': req.body.type,
+    'text': req.body.text,
+    'days': req.body.days
+  };
+  console.log(bodyToUpdate);
+  db.logs.update(
+    {_id: mongojs.ObjectId(req.params.id)}, bodyToUpdate, (err, res) => {
+    if (err) return next(err);
+     /*  response.data = {"text":"all good"};
+      res.json(response);
+      console.log(response); */
   });
 });
 

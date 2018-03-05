@@ -1,18 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { LogsService } from '../../services/logs.service';
-import { easeInOut } from '../../animations';
+import { easeInOut, expandCard } from '../../animations';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.sass'],
   animations: [
-    easeInOut
+    easeInOut,
+    expandCard
   ]
 })
 export class DashboardComponent implements OnInit {
   today = Date.now();
   formSuccesfullySubmited = false;
+  updateLog: {};
   log: {
     week: number,
     day: number,
@@ -53,12 +55,18 @@ export class DashboardComponent implements OnInit {
         for (let i = 0; i < this.logs.length; i++) {
           this.logs[i].weekStart = this.getDateOfWeek(this.logs[i].week, 2017);
           this.logs[i].weekEnd = this.getEndingDateOfWeek(this.logs[i].week, 2017);
+          this.logs[i].showText = false;
           if ('days' in this.logs[i]) {
             this.logs[i].dayEntries = this.logs[i].days.length;
           } else {
             this.logs[i].dayEntries = 0;
           /*   const text = { 'text': 'hee' };
             this.logs[i].days = new Array(text); */
+          }
+          if (this.logs[i].text === '') {
+            this.logs[i].weekEntries = 0;
+          } else {
+            this.logs[i].weekEntries = 1;
           }
         }
   /*       this.logs.forEach(function (obj) {
@@ -83,9 +91,32 @@ export class DashboardComponent implements OnInit {
 
 /* Submits a new log */
    onSubmitAddLog(f) {
-    let type = 'work';
-    type = f.value.personal ? 'personal' : 'work' ;
-    if (f.value.day !== '') {
+     let type = 'work';
+     type = f.value.personal ? 'personal' : 'work' ;
+     for (let i = 0; i < this.logs.length; i++) {
+       if (parseInt(f.value.week, 10) === this.logs[i].week && type === this.logs[i].type ) {
+         console.log(`We already have ${this.logs[i].type} log with week number ${f.value.week}. It will be updated with the latest entry. `);
+         if (f.value.day !== '') {
+           this.updateLog = {
+             week: parseInt(f.value.week, 10),
+             type: type,
+             text: '',
+             days: [{ 'day': f.value.day, 'text': f.value.text }]
+            };
+          } else {
+            this.updateLog = {
+             _id: this.logs[i]._id,
+             week: parseInt(f.value.week, 10),
+             type: type,
+             text: f.value.text,
+             days: []
+           };
+         }
+         this._logsService.updateLog(this.updateLog);
+         return;
+       }
+     }
+     if (f.value.day !== '') {
       this.newLog = {
         week: parseInt(f.value.week, 10),
         type: type,

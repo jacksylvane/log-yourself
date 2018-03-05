@@ -117,18 +117,20 @@
     width: 100%
     display: flex
     flex-wrap: wrap
-    justify-content: space-between  
+    justify-content: start
     .log
       position: relative
-      padding: 1.5rem
+      padding: 1.5rem 1.5rem 2.3rem
       background: #31AB85
       margin: 0 0.75rem 3rem 0.75rem
       width: 15rem
-      height: 10rem
       border-radius: 3px
       box-shadow: 0 2px 8px 0 rgba(128, 128, 128, 0.31)
       font-family: Roboto
       font-weight: 300
+      transition: width .5s ease
+      &:hover
+        cursor: pointer
       h3
         font-size: 1.35rem
         margin-bottom: 0.75rem
@@ -160,9 +162,15 @@
         color: white
         padding: 1rem
       .text
-        line-height: 120%
-        margin-top: 0.5rem
-        white-space: pre-wrap
+        white-space: pre-line
+        line-height: 140%;
+        font-style: italic
+    .expand
+      width: 33rem
+      transition: width .5s ease
+      .text
+        border-top: 1px solid #98e1be
+        margin-top: 1rem
 .personal
   background: #44b98c !important
 .work
@@ -231,4 +239,21 @@ input[type=checkbox]
   bottom: 3rem;
   padding: 1.5rem 1.5rem;
   border-radius: 3px 0 0 3px;
-  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.49);   
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.49);
+
+@media only screen and (max-width: 500px)
+  .container
+    padding: 0 0.5rem
+    .card.logs
+      grid-column: span 6
+      padding: 1rem 0
+      .logs-header
+        width: 100%
+      .log
+        width: 46%
+        padding: 2rem 1.25rem
+        margin: 0 0.3rem 3rem 0.3rem
+      .expand
+        width: 100% !important
+    .addLog
+      grid-column: span 6     
