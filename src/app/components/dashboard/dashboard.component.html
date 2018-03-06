@@ -17,20 +17,22 @@
         </div>
         <div class="date">
           <div>
-            <label>Week:</label>
-            <input type="text" [ngModel] name="week" placeholder="{{today | week }}" >
+            <label for="week">Week:</label>
+            <input type="text" [ngModel] name="week" placeholder="{{today | week }}" maxlength="2">
           </div>
           <div>
-            <label>Day:</label>
-            <input type="text" ngModel name="day" placeholder="{{today | date:'EEEE' }}">
+            <label for="day">Day:</label>
+            <input type="text" ngModel name="day">
           </div>
         </div>
       </div>
       <div class="textInput">
-        <textarea type="text" ngModel name="text"></textarea>
+        <textarea type="text" ngModel name="text" required #text="ngModel"></textarea>
+        <div class="fillAlert" *ngIf="!text.valid && text.touched">Please fill out text area with your lovely words.</div>
       </div>
       <div class="btn-div">
-        <button type="submit" class="btn" [disabled]="!f.valid">Submit</button>
+        <button type="submit" class="btn" [disabled]="!f.valid" 
+         [class.disabled]="!f.valid">Submit</button>
       </div>
     </form>
   </div>
@@ -52,10 +54,10 @@
           <span>{{log.weekEntries}} week entry</span>
           <span>{{log.dayEntries}} daily entries</span>
         </div>
-        <div *ngIf="log.showText" class="text" @expandCard> 
+        <div *ngIf="log.showText" class="text" @expandCard>
            {{log.text}}
+           <button type="button" class="btn" (click)="initDelete(i, log._id)">Delete</button>
         </div>
-        <!-- <button type="button" (click)="initDelete(i, log._id)">X</button> -->
       </div>
     </div>  
   </div>
@@ -67,6 +69,6 @@
 
 <div 
  @easeInOut
-*ngIf="formSuccesfullySubmited" class="alert">
-  Your log has been saved! 🤗💪🎉
+*ngIf="formSuccesfullySubmited" class="alert" id="alert">
+ {{alert}}
 </div>

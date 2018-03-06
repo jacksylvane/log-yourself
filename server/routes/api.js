@@ -62,6 +62,7 @@ router.post('/log', (req, res) => {
 
 // Delete log
 router.post('/delete/:id', (req, res) => {
+  console.log("Received DELETE request");
   console.log(req.params.id);
   db.logs.remove({
     _id: mongojs.ObjectId(req.params.id)}, (err, users) => {
@@ -74,7 +75,8 @@ router.post('/delete/:id', (req, res) => {
 
 // Update log
 router.put('/update/:id', (req, body, res) => {
-  console.log(req.params.id, req.body);
+  console.log("Received UPDATE request");
+  console.log(req.params.id);
   const bodyToUpdate = {
     '_id': mongojs.ObjectId(req.params.id),
     'week': req.body.week,
@@ -82,13 +84,13 @@ router.put('/update/:id', (req, body, res) => {
     'text': req.body.text,
     'days': req.body.days
   };
-  console.log(bodyToUpdate);
-  db.logs.update(
-    {_id: mongojs.ObjectId(req.params.id)}, bodyToUpdate, (err, res) => {
+  // console.log(bodyToUpdate);
+  db.logs.update({
+    _id: mongojs.ObjectId(req.params.id)}, bodyToUpdate, (err, res) => {
     if (err) return next(err);
-     /*  response.data = {"text":"all good"};
-      res.json(response);
-      console.log(response); */
+    response.data = res;
+    // res.json(response);
+    console.log(response);
   });
 });
 

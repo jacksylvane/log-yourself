@@ -1,7 +1,6 @@
 .container
   display: grid
   grid-template-columns: repeat(6, 1fr)
-  grid-template-row: repeat(4, 1fr)
   grid-gap: 2.5rem
   padding: 0 3rem
 .card
@@ -32,7 +31,12 @@
     border-bottom: 2px solid transparent
     background: #49987c
     box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.08)  
-    transition: all .2s ease 
+    transition: all .2s ease
+  &.disabled
+    cursor: not-allowed 
+    background: #bfd8d0
+    border-bottom: 2px solid #CEE3DC
+    box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.08)
 .addLog
   padding: 1rem 1.75rem
   grid-column: span 2
@@ -60,8 +64,7 @@
           label
             margin-right: 1rem
           input
-            height: 1rem
-            padding: 1rem 0.5rem
+            padding: 0.5rem 0.5rem
             border: none
             width: 4rem
             text-align: center
@@ -82,7 +85,8 @@
       input
         margin-bottom: 1rem
     .textInput
-      display: flex  
+      display: flex
+      flex-flow: column
       textarea
         width: 95%
         min-height: 15rem
@@ -99,6 +103,12 @@
           box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.10)
           min-height: 15.2rem
           transition: all .4s ease
+      .fillAlert
+        text-align: center
+        font-size: 0.9rem
+        color: #e95252
+        font-weight: 600
+        margin-bottom: 2rem
     .btn-div
       display: flex
       justify-content: flex-end   
@@ -126,7 +136,6 @@
       width: 15rem
       border-radius: 3px
       box-shadow: 0 2px 8px 0 rgba(128, 128, 128, 0.31)
-      font-family: Roboto
       font-weight: 300
       transition: width .5s ease
       &:hover
@@ -165,6 +174,10 @@
         white-space: pre-line
         line-height: 140%;
         font-style: italic
+        .btn
+          float: right
+          background: #b52e2e
+          border-bottom: 2px solid #8d2323
     .expand
       width: 33rem
       transition: width .5s ease
@@ -241,7 +254,25 @@ input[type=checkbox]
   border-radius: 3px 0 0 3px;
   box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.49);
 
-@media only screen and (max-width: 500px)
+@media only screen and (min-width: 500px) and (max-width: 1000px)
+  .container
+    padding: 0 1rem
+    grid-gap: 1rem
+    .card.logs
+      grid-column: span 3
+      padding: 1rem 0
+      .logs-header
+        width: 100%
+      .log
+        width: 46%
+        padding: 2rem 1.25rem
+        margin: 0 0.3rem 3rem 0.3rem
+      .expand
+        width: 100% !important
+    .addLog
+      grid-column: span 3 
+
+@media only screen and (max-width: 720px)
   .container
     padding: 0 0.5rem
     .card.logs

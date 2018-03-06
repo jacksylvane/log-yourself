@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LogsService } from '../../services/logs.service';
 import { easeInOut, expandCard } from '../../animations';
-
+import { WeekPipe } from '../../pipes/week.pipe';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -9,7 +9,8 @@ import { easeInOut, expandCard } from '../../animations';
   animations: [
     easeInOut,
     expandCard
-  ]
+  ],
+  providers: [ WeekPipe ]
 })
 export class DashboardComponent implements OnInit {
   today = Date.now();
@@ -33,8 +34,8 @@ export class DashboardComponent implements OnInit {
   showConfirmDelete = false;
   logToDeleteIndex: number;
   logToDeleteId: number;
-
-  constructor(private _logsService: LogsService) {
+  alert = '';
+  constructor(private _logsService: LogsService, private weekPipe: WeekPipe) {
     // Access the Data Service's getAllLogs() method we defined
     this.getAllLogs();
   }
@@ -93,12 +94,13 @@ export class DashboardComponent implements OnInit {
    onSubmitAddLog(f) {
      let type = 'work';
      type = f.value.personal ? 'personal' : 'work' ;
+     const week = f.value.week ? parseInt(f.value.week, 10) : this.weekPipe.transform(new Date(this.today));
      for (let i = 0; i < this.logs.length; i++) {
        if (parseInt(f.value.week, 10) === this.logs[i].week && type === this.logs[i].type ) {
-         console.log(`We already have ${this.logs[i].type} log with week number ${f.value.week}. It will be updated with the latest entry. `);
+        //  console.log(`We already have ${this.logs[i].type} log with week number ${f.value.week}. It will be updated with the latest entry. `);
          if (f.value.day !== '') {
            this.updateLog = {
-             week: parseInt(f.value.week, 10),
+             week: week,
              type: type,
              text: '',
              days: [{ 'day': f.value.day, 'text': f.value.text }]
@@ -106,37 +108,40 @@ export class DashboardComponent implements OnInit {
           } else {
             this.updateLog = {
              _id: this.logs[i]._id,
-             week: parseInt(f.value.week, 10),
+             week: week,
              type: type,
              text: f.value.text,
              days: []
            };
          }
+        //  console.log(this.updateLog);
          this._logsService.updateLog(this.updateLog);
+         this.getAllLogs();
+         this.showAlert('Log has been updated! ✏️');
          return;
        }
      }
      if (f.value.day !== '') {
       this.newLog = {
-        week: parseInt(f.value.week, 10),
+        week: week,
         type: type,
         text: '',
         days: [{'day' : f.value.day, 'text': f.value.text}]
       };
     } else {
       this.newLog = {
-       week: parseInt(f.value.week, 10),
-             type: type,
-             text: f.value.text,
-             days: []
-            };
+      week: week,
+      type: type,
+      text: f.value.text,
+      days: []
+    };
     }
     console.log(this.newLog);
+    console.log(this.newLog.text);
     this._logsService.insertLog(this.newLog);
     console.log(this.logs);
     this.getAllLogs();
-    this.formSuccesfullySubmited = true;
-    setTimeout(() => this.formSuccesfullySubmited = false, 3000);
+     this.showAlert('Log has been added! 📃💪🎉');
   }
 
 /* Determines color of card header based on type of a log */
@@ -160,6 +165,13 @@ initDelete(i, id) {
     this.showConfirmDelete = false;
     this._logsService.deleteLog(this.logToDeleteId);
     this.logs.splice(this.logToDeleteIndex, 1);
+    this.showAlert('Log has been deleted! 💣🗑️' );
+  }
+
+  showAlert(text) {
+    this.formSuccesfullySubmited = true;
+    this.alert = text;
+    setTimeout(() => this.formSuccesfullySubmited = false, 3000);
   }
 
   ngOnInit() {
