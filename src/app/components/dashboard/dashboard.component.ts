@@ -36,6 +36,7 @@ export class DashboardComponent implements OnInit {
   logToDeleteIndex: number;
   logToDeleteId: number;
   alert = '';
+  current = null;
   constructor(private _logsService: LogsService, private weekPipe: WeekPipe) {
     // Access the Data Service's getAllLogs() method we defined
     this.getAllLogs();
@@ -218,6 +219,18 @@ initDelete(i, id) {
     this.formSuccesfullySubmited = true;
     this.alert = text;
     setTimeout(() => this.formSuccesfullySubmited = false, 3000);
+  }
+
+  expandCard(i, event) {
+    console.log(event.target.tagName);
+    if (event.target.tagName === 'BUTTON' ) {
+      return;
+    }
+    this.logs[i].showText = !this.logs[i].showText;
+    setTimeout(function () {
+      const el2 = document.querySelector('.unique');
+      el2.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
   }
 
   ngOnInit() {

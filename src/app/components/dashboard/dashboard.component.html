@@ -45,7 +45,7 @@
        *ngFor="let log of logs; let i = index" 
        [ngClass]="getClass(log)"
        [class.expand]="this.logs[i].showText"
-       (click)="this.logs[i].showText = !this.logs[i].showText;">
+       (click)="expandCard(i, $event)">
         <!-- <div class="log-title" [ngClass]="getClass(log)">
           <p>{{log.type}}</p>
         </div> -->
@@ -56,25 +56,44 @@
           <span>{{log.weekEntries}} week entry</span>
           <span>{{log.dayEntries}} daily entries</span>
         </div>
-        <div *ngIf="log.showText" class="textWindow" @expandCard>
+        <div *ngIf="log.showText" class="textWindow" >
           <div *ngIf="log.days" class="entries">
-            <button *ngFor="let day of log.days" class="btn entryBtn" >
+            <button 
+            *ngIf="log.text" 
+            class="btn entryBtn"
+            id="yo"
+            [class.active]="null == this.current"
+            (click)="this.current = null"
+            >
+              Week {{log.week}}
+            </button>
+            <button 
+            *ngFor="let day of log.days; index as j"
+            class="btn entryBtn"
+            [class.active]="j == this.current"
+            (click)="log.text = day.text; this.current = j"
+            >
               {{day.day}}
             </button>
           </div>
-          <div class="text">
+          <div class="text unique" id="unique" @expandCard>
             {{log.text}}
           </div>
           <div class="buttonDelete">
-            <button type="button" class="btn" id="deleteBtn" (click)="initDelete(i, log._id)">Delete</button>
+            <button type="button" class="btn  btn-delete" id="deleteBtn" (click)="initDelete(i, log._id)">Delete</button>
           </div>
         </div>
       </div>
     </div>  
   </div>
-  <div *ngIf="showConfirmDelete" class="confirm-delete">Do you really want to delete this log?
-    <button type="button" (click)="deleteLog(i, id)">DELETE</button>
-    <button type="button" (click)="this.showConfirmDelete = false">CANCEL</button>
+  <div *ngIf="showConfirmDelete" class="confirm-delete">
+    <div class="confirmPopup">
+      <div class="text">
+        Do you really want to delete this log?
+      </div>
+      <button type="button" class="btn btn-delete" (click)="deleteLog(i, id)">DELETE</button>
+      <button type="button" class="btn btn-cancel" (click)="this.showConfirmDelete = false">CANCEL</button>
+    </div>
   </div>
 </div>
 
