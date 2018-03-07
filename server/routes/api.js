@@ -19,11 +19,6 @@ let response = {
   message: null
 };
 
-let testResponse = {
-  status: 200,
-  data: "ok"
-};
-
 // Get all logs
 router.get('/logs', (req, res) => {
   db.logs.find().sort({ "week": 1 }, (err, users) => {
@@ -35,6 +30,7 @@ router.get('/logs', (req, res) => {
 
 // Get Work Logs
 router.get('/logs/work', (req, res) => {
+  console.log("Receive request for /logs/work");
   db.logs.find({ "type": "work" }).sort({ "week": 1 }, (err, users) => {
     if (err) return next(err);
     response.data = users;
@@ -44,9 +40,11 @@ router.get('/logs/work', (req, res) => {
 
 // Get Personal Logs
 router.get('/logs/personal', (req, res) => {
+  console.log("Receive request for /logs/personal");
   db.logs.find({ "type": "personal" }).sort({ "week": 1 }, (err, users) => {
     if (err) return next(err);
     response.data = users;
+    response.message = 'Here are your logs'
     res.json(response);
   });
 });
@@ -56,6 +54,7 @@ router.post('/log', (req, res) => {
   db.logs.insert(req.body, (err, users) => {
     if (err) return next(err);
     response.data = users;
+    response.message = 'Log has been succesfully added.'
     res.json(response);
   });
 });
@@ -68,15 +67,15 @@ router.post('/delete/:id', (req, res) => {
     _id: mongojs.ObjectId(req.params.id)}, (err, users) => {
     if (err) return next(err);
     response.data = users;
+    response.message = 'Log has been succesfully deleted.'
     res.json(response);
-    console.log(response);
   });
 });
 
 // Update log
-router.put('/update/:id', (req, body, res) => {
+router.put('/update/:id', (req, res) => {
   console.log("Received UPDATE request");
-  console.log(req.params.id);
+  console.log(req.body);
   const bodyToUpdate = {
     '_id': mongojs.ObjectId(req.params.id),
     'week': req.body.week,
@@ -84,12 +83,12 @@ router.put('/update/:id', (req, body, res) => {
     'text': req.body.text,
     'days': req.body.days
   };
-  // console.log(bodyToUpdate);
   db.logs.update({
-    _id: mongojs.ObjectId(req.params.id)}, bodyToUpdate, (err, res) => {
+    _id: mongojs.ObjectId(req.params.id)
+  }, bodyToUpdate, (err, logs) => {
     if (err) return next(err);
-    response.data = res;
-    // res.json(response);
+    response.data = logs;
+    res.json(response);
     console.log(response);
   });
 });

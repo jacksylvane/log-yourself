@@ -31,6 +31,7 @@ export class DashboardComponent implements OnInit {
     days: Array<object>
   };
   logs: Array<any>;
+  days: Array<object>;
   showConfirmDelete = false;
   logToDeleteIndex: number;
   logToDeleteId: number;
@@ -82,12 +83,50 @@ export class DashboardComponent implements OnInit {
   }
   showWorkLogs() {
     this._logsService.getWorkLogs()
-      .subscribe(res => this.logs = res);
-  }
+      .subscribe((res) => {
+        this.logs = res;
+        for (let i = 0; i < this.logs.length; i++) {
+          this.logs[i].weekStart = this.getDateOfWeek(this.logs[i].week, 2017);
+          this.logs[i].weekEnd = this.getEndingDateOfWeek(this.logs[i].week, 2017);
+          this.logs[i].showText = false;
+          if ('days' in this.logs[i]) {
+            this.logs[i].dayEntries = this.logs[i].days.length;
+          } else {
+            this.logs[i].dayEntries = 0;
+          /*   const text = { 'text': 'hee' };
+            this.logs[i].days = new Array(text); */
+          }
+          if (this.logs[i].text === '') {
+            this.logs[i].weekEntries = 0;
+          } else {
+            this.logs[i].weekEntries = 1;
+          }
+        }
+  });
+}
 
   showPersonalLogs() {
     this._logsService.getPersonalLogs()
-      .subscribe(res => this.logs = res);
+      .subscribe((res) => {
+        this.logs = res;
+        for (let i = 0; i < this.logs.length; i++) {
+          this.logs[i].weekStart = this.getDateOfWeek(this.logs[i].week, 2017);
+          this.logs[i].weekEnd = this.getEndingDateOfWeek(this.logs[i].week, 2017);
+          this.logs[i].showText = false;
+          if ('days' in this.logs[i]) {
+            this.logs[i].dayEntries = this.logs[i].days.length;
+          } else {
+            this.logs[i].dayEntries = 0;
+            /*   const text = { 'text': 'hee' };
+              this.logs[i].days = new Array(text); */
+          }
+          if (this.logs[i].text === '') {
+            this.logs[i].weekEntries = 0;
+          } else {
+            this.logs[i].weekEntries = 1;
+          }
+        }
+      });
   }
 
 /* Submits a new log */
@@ -98,23 +137,30 @@ export class DashboardComponent implements OnInit {
      for (let i = 0; i < this.logs.length; i++) {
        if (parseInt(f.value.week, 10) === this.logs[i].week && type === this.logs[i].type ) {
         //  console.log(`We already have ${this.logs[i].type} log with week number ${f.value.week}. It will be updated with the latest entry. `);
+        if ('days' in this.logs[i] === false) {
+          this.logs[i].days = [];
+         }
          if (f.value.day !== '') {
+           const newDayToPush = { 'day': f.value.day, 'text': f.value.text };
+           this.logs[i].days.push(newDayToPush);
            this.updateLog = {
-             week: week,
-             type: type,
-             text: '',
-             days: [{ 'day': f.value.day, 'text': f.value.text }]
-            };
-          } else {
-            this.updateLog = {
              _id: this.logs[i]._id,
              week: week,
              type: type,
-             text: f.value.text,
-             days: []
+             text: this.logs[i].text,
+             days: this.logs[i].days
+            };
+            console.log(this.updateLog);
+          } else {
+            this.updateLog = {
+            _id: this.logs[i]._id,
+            week: week,
+            type: type,
+            text: f.value.text,
+            days: this.logs[i].days
            };
          }
-        //  console.log(this.updateLog);
+         console.log(this.updateLog);
          this._logsService.updateLog(this.updateLog);
          this.getAllLogs();
          this.showAlert('Log has been updated! ✏️');

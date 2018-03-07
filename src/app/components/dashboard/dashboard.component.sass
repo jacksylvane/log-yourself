@@ -16,6 +16,8 @@
     color: #fff
     font-size: 1.25rem
     font-weight: lighter
+  .filterBtns
+    margin: 0 0 2rem 0 
 .btn
   border: none
   background: #67B29B
@@ -162,6 +164,13 @@
         display: inline-flex
         justify-content: space-between
         width: 100%
+      .entries
+        width: 100%
+        margin-top: 1rem
+        .btn
+          margin-right: 0.5rem
+          padding: .75rem 1rem
+          text-transform: none
       .log-title
         display: flex
         justify-content: space-between
@@ -174,16 +183,22 @@
         white-space: pre-line
         line-height: 140%;
         font-style: italic
-        .btn
-          float: right
-          background: #b52e2e
-          border-bottom: 2px solid #8d2323
+        font-family: Roboto
+      #deleteBtn
+        width: max-content
+        float: right
+        background: #d74d4d
+        border-bottom: 2px solid #bd4747
     .expand
       width: 33rem
       transition: width .5s ease
-      .text
+      .textWindow
         border-top: 1px solid #98e1be
         margin-top: 1rem
+        display: flex
+        flex-flow: column
+        .text
+          margin-bottom: 2rem  
 .personal
   background: #44b98c !important
 .work
@@ -253,7 +268,20 @@ input[type=checkbox]
   padding: 1.5rem 1.5rem;
   border-radius: 3px 0 0 3px;
   box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.49);
-
+#aboutThis
+  background: #f0f0f0
+  position: fixed
+  left: 1rem
+  bottom: 1rem
+  padding: 1rem 1.5rem
+  color: var(--black)
+  font-weight: bold
+  span
+    width: 100%
+    display: block
+    font-size: 2rem
+    text-align: center
+    margin-bottom: 1rem
 @media only screen and (min-width: 500px) and (max-width: 1000px)
   .container
     padding: 0 1rem
@@ -282,8 +310,15 @@ input[type=checkbox]
         width: 100%
       .log
         width: 46%
-        padding: 2rem 1.25rem
+        padding: 1.75rem 1.25rem
         margin: 0 0.3rem 3rem 0.3rem
+        .entriesCount
+          display: flex
+          flex-flow: column
+          margin-top: 1.8rem
+          text-align: right
+          span:first-child
+            margin-bottom: .5rem
       .expand
         width: 100% !important
     .addLog
