@@ -37,6 +37,7 @@ export class DashboardComponent implements OnInit {
   logToDeleteId: number;
   alert = '';
   current = null;
+  currentShowbtn = 0;
   constructor(private _logsService: LogsService, private weekPipe: WeekPipe) {
     // Access the Data Service's getAllLogs() method we defined
     this.getAllLogs();
@@ -52,6 +53,7 @@ export class DashboardComponent implements OnInit {
   }
 
   getAllLogs() {
+    this.currentShowbtn = 0;
     this._logsService.getAllLogs()
       .subscribe((res) => {
         this.logs = res;
@@ -83,6 +85,7 @@ export class DashboardComponent implements OnInit {
       });
   }
   showWorkLogs() {
+    this.currentShowbtn = 1;
     this._logsService.getWorkLogs()
       .subscribe((res) => {
         this.logs = res;
@@ -107,6 +110,7 @@ export class DashboardComponent implements OnInit {
 }
 
   showPersonalLogs() {
+    this.currentShowbtn = 2;
     this._logsService.getPersonalLogs()
       .subscribe((res) => {
         this.logs = res;
@@ -228,8 +232,8 @@ initDelete(i, id) {
     }
     this.logs[i].showText = !this.logs[i].showText;
     setTimeout(function () {
-      const el2 = document.querySelector('.unique');
-      el2.scrollIntoView({ behavior: 'smooth' });
+      const x = document.querySelector(`[data-index="${i}"]`);
+      x.scrollIntoView({ behavior: 'smooth' });
     }, 100);
   }
 

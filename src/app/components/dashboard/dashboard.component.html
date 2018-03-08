@@ -36,9 +36,9 @@
   <div class="card logs">
     <div class="logs-header card-header"> Your weekly logs</div>
     <div class="filterBtns">
-      <button class="btn" (click)="getAllLogs()">All</button>
-      <button class="btn" (click)="showWorkLogs()">Work</button>
-      <button class="btn" (click)="showPersonalLogs()">Personal</button>
+      <button class="btn" [class.active]="this.currentShowbtn == 0" (click)="getAllLogs();">All</button>
+      <button class="btn" [class.active]="this.currentShowbtn == 1" (click)="showWorkLogs()">Work</button>
+      <button class="btn" [class.active]="this.currentShowbtn == 2" (click)="showPersonalLogs()">Personal</button>
     </div>
     <div class="entriesCards">
       <div class="log"
@@ -76,7 +76,7 @@
               {{day.day}}
             </button>
           </div>
-          <div class="text unique" id="unique" @expandCard>
+          <div class="text unique" id="unique" @expandCard [attr.data-index]="i">
             {{log.text}}
           </div>
           <div class="buttonDelete">

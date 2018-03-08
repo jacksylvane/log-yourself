@@ -39,6 +39,8 @@
     background: #bfd8d0
     border-bottom: 2px solid #CEE3DC
     box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.08)
+  &:focus
+    outline: none
 .btn-delete
   background: #d74d4d
   border-bottom: 2px solid #bd4747
@@ -139,6 +141,10 @@
   background: #F0F0F0
   border-radius: 3px
   margin: 2rem auto
+  .btn.active
+    background: #065c3d
+    border-bottom: transparent
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.53)
   .entriesCards
     width: 100%
     display: flex
@@ -229,7 +235,7 @@
   height: 100vh
   color: white
   text-align: center
-  padding: 5rem
+  padding: 5rem 0
   font-weight: bold
   z-index: 1
   .confirmPopup
@@ -238,6 +244,8 @@
     color: var(--black)
     width: max-content
     margin: 0 auto
+    border-radius: 3px
+    box-shadow: 0 2px 13px 4px rgba(0, 0, 0, 0.23)
     .text
       margin-bottom: 3rem
       
@@ -359,4 +367,7 @@ input[type=checkbox]
       .expand
         width: 100% !important
     .addLog
-      grid-column: span 6     
+      grid-column: span 6
+  .confirm-delete
+    .confirmPopup
+      padding: 4rem 2.5rem   
