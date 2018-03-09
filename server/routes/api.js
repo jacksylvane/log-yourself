@@ -19,6 +19,16 @@ let response = {
   message: null
 };
 
+// Get logs from particular user
+router.post('/user', (req, res) => {
+  console.log(req.body._id);
+  db.logs.findOne({ _id: mongojs.ObjectId(req.body._id) }, (err, users) => {
+    if (err) return next(err);
+    response.data = users.logs;
+    res.json(response);
+  });
+});
+
 // Get all logs
 router.get('/logs', (req, res) => {
   db.logs.find().sort({ "week": 1 }, (err, users) => {

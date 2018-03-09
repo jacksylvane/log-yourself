@@ -54,7 +54,7 @@ export class DashboardComponent implements OnInit {
 
   getAllLogs() {
     this.currentShowbtn = 0;
-    this._logsService.getAllLogs()
+    this._logsService.getAllLogs({ '_id': '5aa313360538253070a4d7a4' })
       .subscribe((res) => {
         this.logs = res;
         for (let i = 0; i < this.logs.length; i++) {
