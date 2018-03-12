@@ -19,18 +19,8 @@ let response = {
   message: null
 };
 
-// Get logs from particular user
-router.post('/user', (req, res) => {
-  console.log(req.body._id);
-  db.logs.findOne({ _id: mongojs.ObjectId(req.body._id) }, (err, users) => {
-    if (err) return next(err);
-    response.data = users.logs;
-    res.json(response);
-  });
-});
-
 // Get all logs
-router.get('/logs', (req, res) => {
+router.post('/logs', (req, res) => {
   db.logs.find().sort({ "week": 1 }, (err, users) => {
     if (err) return next(err);
     response.data = users;
@@ -39,7 +29,7 @@ router.get('/logs', (req, res) => {
 });
 
 // Get Work Logs
-router.get('/logs/work', (req, res) => {
+router.post('/logs/work', (req, res) => {
   console.log("Receive request for /logs/work");
   db.logs.find({ "type": "work" }).sort({ "week": 1 }, (err, users) => {
     if (err) return next(err);
@@ -49,15 +39,15 @@ router.get('/logs/work', (req, res) => {
 });
 
 // Get Personal Logs
-router.get('/logs/personal', (req, res) => {
+router.post('/logs/personal', (req, res) => {
   console.log("Receive request for /logs/personal");
   db.logs.find({ "type": "personal" }).sort({ "week": 1 }, (err, users) => {
     if (err) return next(err);
     response.data = users;
-    response.message = 'Here are your logs'
     res.json(response);
   });
 });
+
 
 // Save log
 router.post('/log', (req, res) => {

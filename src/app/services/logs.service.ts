@@ -10,15 +10,15 @@ export class LogsService {
   constructor(private _http: Http) { }
 
   getAllLogs(id) {
-    return this._http.post('/api/user', id)
+    return this._http.post('/api/logs', id)
       .map(result => this.result = result.json().data);
   }
-  getWorkLogs() {
-    return this._http.get('/api/logs/work')
+  getWorkLogs(id) {
+    return this._http.post('/api/logs/work', id)
       .map(result => this.result = result.json().data);
   }
-  getPersonalLogs() {
-    return this._http.get('/api/logs/personal')
+  getPersonalLogs(id) {
+    return this._http.post('/api/logs/personal', id)
       .map(result => this.result = result.json().data);
   }
 

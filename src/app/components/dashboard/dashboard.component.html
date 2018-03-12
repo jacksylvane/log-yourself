@@ -1,8 +1,47 @@
 <app-navbar></app-navbar>
 <div class="container">
-  <div class="addLog card">
-    <div class="addLog-header card-header"> Add entry</div>
-    <form #f="ngForm" (ngSubmit)="onSubmitAddLog(f)">
+  <div class="addLog card"  [class.tiny]="!showAddLog">
+    <div class="addLog-header card-header" (click)="showAddLog = !showAddLog"> Add entry</div>
+<!--     <form *ngIf="showAddLog" [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
+      <input formControlName="name" placeholder="Your name">
+      <input formControlName="email" placeholder="Your email">
+      <input formControlName="message" placeholder="Your message">
+    
+      <button type="submit">Send</button>
+    </form> -->
+    <form *ngIf="showAddLog" [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
+      <div id="inputsContainer">
+        <div class="type">
+          Type:
+          <div class="checkboxThree">
+            <input type="checkbox" formControlName="type"id="checkboxThreeInput"/>
+            <label for="checkboxThreeInput">
+            </label>
+          </div>
+        </div>
+        <div class="date">
+          <div>
+            <label for="week">Week:</label>
+            <input type="text" formControlName="week" placeholder="{{today | week }}">
+              <div class="maxValue-alert" *ngIf="myForm.get('week').hasError('max')">
+                There are only 52 weeks in a year.
+              </div>
+          </div>
+          <div>
+            <label for="day">Day:</label>
+            <input type="text" formControlName="day">
+          </div>
+        </div>
+      </div>
+      <div class="textInput">
+        <textarea type="text"  formControlName="text" [(ngModel)]=addLog.text></textarea>
+        <div class="fillAlert" *ngIf="myForm.get('text').hasError('required') && myForm.get('text').touched">Please fill out text area with your lovely words.</div>
+      </div>
+      <div class="btn-div">
+        <button type="submit" class="btn" [disabled]="!myForm.valid" [class.disabled]="!myForm.valid">Submit</button>
+      </div>
+    </form>
+    <!-- <form *ngIf="showAddLog" #f="ngForm" (ngSubmit)="onSubmitAddLog(f)" @expandCard>
       <div id="inputsContainer">
         <div class="type">
           Type:
@@ -24,16 +63,16 @@
         </div>
       </div>
       <div class="textInput">
-        <textarea type="text" ngModel name="text" required #text="ngModel"></textarea>
+        <textarea type="text" [(ngModel)]="addLog.text" name="text" required #text="ngModel"></textarea>
         <div class="fillAlert" *ngIf="!text.valid && text.touched">Please fill out text area with your lovely words.</div>
       </div>
       <div class="btn-div">
         <button type="submit" class="btn" [disabled]="!f.valid" 
          [class.disabled]="!f.valid">Submit</button>
       </div>
-    </form>
+    </form> -->
   </div>
-  <div class="card logs">
+  <div class="card logs" [class.giant]="!showAddLog">
     <div class="logs-header card-header"> Your weekly logs</div>
     <div class="filterBtns">
       <button class="btn" [class.active]="this.currentShowbtn == 0" (click)="getAllLogs();">All</button>
@@ -58,26 +97,30 @@
         </div>
         <div *ngIf="log.showText" class="textWindow" >
           <div *ngIf="log.days" class="entries">
-            <button 
-            *ngIf="log.text" 
-            class="btn entryBtn"
-            id="yo"
-            [class.active]="null == this.current"
-            (click)="this.current = null"
-            >
-              Week {{log.week}}
-            </button>
-            <button 
-            *ngFor="let day of log.days; index as j"
-            class="btn entryBtn"
-            [class.active]="j == this.current"
-            (click)="log.text = day.text; this.current = j"
-            >
-              {{day.day}}
-            </button>
+            <div class="weeks-btns">
+              <button 
+              *ngFor="let text of log.text; index as k"
+              class="btn entryBtn"
+              id="yo"
+               [ngClass]="getActiveClass(k, 'k')"
+              (click)="log.textToshow = text.text; this.current.number = k; this.current.index = 'k'"
+              >
+                Entry {{[k + 1]}}.
+              </button>
+            </div>
+            <div class="days-btns">
+              <button 
+              *ngFor="let day of log.days; index as j"
+              class="btn entryBtn"
+               [ngClass]="getActiveClass(j, 'j', log.text)"
+              (click)="log.textToshow = day.text; this.current.number = j; this.current.index = 'j'"
+              >
+                {{day.day}}
+              </button>
+            </div>
           </div>
           <div class="text unique" id="unique" @expandCard [attr.data-index]="i">
-            {{log.text}}
+           {{log.textToshow}}
           </div>
           <div class="buttonDelete">
             <button type="button" class="btn  btn-delete" id="deleteBtn" (click)="initDelete(i, log._id)">Delete</button>

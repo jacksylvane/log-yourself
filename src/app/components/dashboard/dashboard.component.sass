@@ -1,23 +1,28 @@
 .container
   display: grid
   grid-template-columns: repeat(6, 1fr)
-  grid-gap: 2.5rem
+  grid-column-gap: 2.5rem
   padding: 0 3rem
 .card
   box-shadow: 0px 2px 8px 0px rgba(162, 161, 161, 0.42)
+  min-width: 12rem
   .card-header
     width: calc(100% + 3.5rem)
     background: linear-gradient(#2F9173, #3f9c80)
     box-shadow: 0px 2px 8px 0px rgba(162, 161, 161, 0.42)
     margin: -1rem -1.75rem
-    margin-bottom: 2rem
     padding: 1.2rem 1.35rem
     border-radius: 3px 3px 0 0
     color: #fff
     font-size: 1.25rem
     font-weight: lighter
+  .addLog-header:hover
+    cursor: pointer
+    transition: all 0.2s ease-in-out
+    background: linear-gradient(#2b8368, #35876e)
   .filterBtns
-    margin: 0 0 2rem 0 
+    margin: 2.5rem 0 2rem 0
+    text-align: center 
 .btn
   border: none
   background: #67B29B
@@ -54,7 +59,7 @@
   &:hover
     background: #848b89
     box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.08)  
-    transition: all .2s ease  
+    transition: all .2s ease
 .addLog
   padding: 1rem 1.75rem
   grid-column: span 2
@@ -64,13 +69,14 @@
   margin: 2rem auto
   form
     color: var(--black)
+    margin-top: 2rem
     #inputsContainer
       width: 95%
       margin: 0 auto
       .type
         display: inline-flex
         justify-content: space-between
-        width: 69%
+        width: 15rem
         align-items: center
         margin-bottom: 2rem
       .date
@@ -78,6 +84,10 @@
         justify-content: space-between
         width: 100%
         margin-bottom: 1rem
+        .maxValue-alert
+          font-size: 0.8rem
+          position: absolute
+          margin-top: -0.4rem
         div
           label
             margin-right: 1rem
@@ -129,14 +139,17 @@
         margin-bottom: 2rem
     .btn-div
       display: flex
-      justify-content: flex-end   
+      justify-content: flex-end
+.tiny
+  grid-column: span 1
+  .card-header
+    text-align: center         
 .logs
   display: flex
-  flex-flow: wrap
+  flex-flow: column
   grid-column: span 4
   grid-row: span 2
   max-width: 65rem
-  justify-content: center
   padding: 1rem 1.75rem
   background: #F0F0F0
   border-radius: 3px
@@ -325,14 +338,19 @@ input[type=checkbox]
       padding: 1rem 0
       .logs-header
         width: 100%
+        margin-left: 0rem
       .log
         width: 46%
         padding: 2rem 1.25rem
         margin: 0 0.3rem 3rem 0.3rem
+      .giant
+        grid-column: span 6   
       .expand
         width: 100% !important
     .addLog
-      grid-column: span 3 
+      grid-column: span 3
+    .tiny
+      grid-column: span 1      
 
 @media only screen and (max-width: 720px)
   .container
@@ -343,12 +361,15 @@ input[type=checkbox]
           width: 90%
         .date
           input
-            margin-top: 0.5rem  
+            margin-top: 0.5rem
+    .tiny
+      grid-column: span 1                
     .card.logs
       grid-column: span 6
       padding: 1rem 0
       .logs-header
         width: 100%
+        margin-left: 0rem
       .log
         width: 46%
         padding: 1.75rem 1.25rem
@@ -363,7 +384,9 @@ input[type=checkbox]
             margin-bottom: .5rem
         h4
           top: 2rem
-          right: 1rem    
+          right: 1rem
+      .giant
+        grid-column: span 6         
       .expand
         width: 100% !important
     .addLog
