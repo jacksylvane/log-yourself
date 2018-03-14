@@ -54,7 +54,9 @@ export class DashboardComponent implements OnInit {
     // Access the Data Service's getAllLogs() method we defined
     this.getAllLogs();
   }
-
+  returnTrue() {
+    return true;
+  }
   getDateOfWeek(w, y) {
     const d = (1 + (w - 1) * 7); // 1st of January + 7 days for each week
     return new Date(y, 0, d);
@@ -161,69 +163,6 @@ export class DashboardComponent implements OnInit {
       });
   }
 
-/* Submits a new log */
-  //  onSubmitAddLog(f) {
-  //    let type = 'work';
-  //    type = f.value.personal ? 'personal' : 'work' ;
-  //    const week = f.value.week ? parseInt(f.value.week, 10) : this.weekPipe.transform(new Date(this.today));
-  //    for (let i = 0; i < this.logs.length; i++) {
-  //      if (parseInt(f.value.week, 10) === this.logs[i].week && type === this.logs[i].type ) {
-  //       if ('days' in this.logs[i] === false) {
-  //         this.logs[i].days = [];
-  //        }
-  //        if (f.value.day !== '') {
-  //          const newDayToPush = { 'day': f.value.day, 'text': f.value.text };
-  //          this.logs[i].days.push(newDayToPush);
-  //          this.updateLog = {
-  //            _id: this.logs[i]._id,
-  //            week: week,
-  //            type: type,
-  //            text: this.logs[i].text,
-  //            days: this.logs[i].days
-  //           };
-  //           console.log(this.updateLog);
-  //         } else {
-  //           this.updateLog = {
-  //           _id: this.logs[i]._id,
-  //           week: week,
-  //           type: type,
-  //           text: f.value.text,
-  //           days: this.logs[i].days
-  //          };
-  //        }
-  //        console.log(this.updateLog);
-  //        this._logsService.updateLog(this.updateLog);
-  //        this.getAllLogs();
-  //        this.showAlert('Log has been updated! ✏️');
-  //        return;
-  //      }
-  //    }
-  //    if (f.value.day !== '') {
-  //     this.newLog = {
-  //       week: week,
-  //       type: type,
-  //       text: '',
-  //       days: [{'day' : f.value.day, 'text': f.value.text}]
-  //     };
-  //   } else {
-  //     this.newLog = {
-  //     week: week,
-  //     type: type,
-  //     text: this.addLog.text,
-  //     days: []
-  //   };
-  //   }
-  //   console.log(this.newLog);
-  //   console.log(this.newLog.text);
-  //   // this._logsService.insertLog(this.newLog);
-  //   console.log(this.logs);
-  //   this.getAllLogs();
-  //    this.addLog.text = '';
-  //   //  this.f.markAsPristineAndUntouched();
-  //    this.showAlert('Log has been added! 📃💪🎉');
-  // }
-
-
 /* Determines color of card header based on type of a log */
   getClass(type) {
     if (type.type === 'personal') {
@@ -277,13 +216,7 @@ initDelete(i, id) {
     }, 200);
   }
   onSubmit(f: FormGroup) {
-    // f.value.type = f.value.type ? 'personal' : 'work';
-    // f.value.week = f.value.week ? parseInt(f.value.week, 10) : this.weekPipe.transform(new Date(this.today));
-    // console.log('Valid?', f.valid); // true or false
     console.log('Type', f.value.type);
-    // console.log('Day', f.value.day);
-    // console.log('Week', f.value.week);
-    // console.log('Message', f.value.text);
     const type = f.value.type ? 'personal' : 'work';
     const week = f.value.week ? parseInt(f.value.week, 10) : this.weekPipe.transform(new Date(this.today));
     for (let i = 0; i < this.logs.length; i++) {

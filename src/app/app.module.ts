@@ -11,14 +11,17 @@ import { LogsService } from './services/logs.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { WeekPipe } from './pipes/week.pipe';
 import { NavbarComponent } from './components/navbar/navbar.component';
-
+import { TestingComponent } from './components/testing/testing.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     WeekPipe,
-    NavbarComponent
+    NavbarComponent,
+    TestingComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +29,10 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     FormsModule,
     HttpModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ServiceWorkerModule.register('/ngsw-worker.js', {
+      enabled: environment.production
+    })
   ],
   providers: [LogsService],
   bootstrap: [AppComponent]

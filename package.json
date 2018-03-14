@@ -13,6 +13,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular-devkit/build-optimizer": "^0.4.5",
     "@angular/animations": "^5.2.7",
     "@angular/common": "^5.2.7",
     "@angular/compiler": "^5.2.7",
@@ -22,6 +23,7 @@
     "@angular/platform-browser": "^5.2.7",
     "@angular/platform-browser-dynamic": "^5.2.7",
     "@angular/router": "^5.2.7",
+    "@angular/service-worker": "^5.2.8",
     "body-parser": "^1.18.2",
     "core-js": "^2.4.1",
     "express": "^4.16.2",
