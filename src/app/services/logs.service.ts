@@ -54,7 +54,7 @@ export class LogsService {
         .map(res => res.json())
         .subscribe(res => {
           resolve(res);
-          // console.log(res);
+          console.log(res);
         }, (err) => {
           reject(err);
         });

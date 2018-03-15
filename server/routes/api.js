@@ -3,7 +3,8 @@ const router = express.Router();
 const MongoClient = require('mongodb').MongoClient;
 const ObjectID = require('mongodb').ObjectID;
 const mongojs = require("mongojs");
-const db = mongojs("log-yourself", ["log"]);
+// const db = mongojs("log-yourself", ["logs"]);
+const db = mongojs('mongodb://admin:pucBim2SJAXm@ds213759.mlab.com:13759/log-yourself', ["logs"]);
 
 // Error handling
 const sendError = (err, res) => {
@@ -21,6 +22,7 @@ let response = {
 
 // Get all logs
 router.post('/logs', (req, res) => {
+  console.log(req.body);
   db.logs.find().sort({ "week": 1 }, (err, users) => {
     if (err) return next(err);
     response.data = users;
@@ -51,6 +53,7 @@ router.post('/logs/personal', (req, res) => {
 
 // Save log
 router.post('/log', (req, res) => {
+  console.log(req.body);
   db.logs.insert(req.body, (err, users) => {
     if (err) return next(err);
     response.data = users;
@@ -79,6 +82,7 @@ router.put('/update/:id', (req, res) => {
   const bodyToUpdate = {
     '_id': mongojs.ObjectId(req.params.id),
     'week': req.body.week,
+    'userId': req.body.userId,
     'type': req.body.type,
     'text': req.body.text,
     'days': req.body.days
