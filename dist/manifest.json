@@ -1,0 +1,20 @@
+{
+  "short_name": "Log-yourself",
+  "name": "Log-yourself for real, man!",
+  "start_url": "/",
+
+  "theme_color": "#2f9173",
+  "background": "#ffffff",
+  "background_color": "#ffffff",
+  
+  "display": "standalone",
+  "standalone": "portrait",
+
+  "icons":[
+    {
+      "src": "/assets/icon513.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

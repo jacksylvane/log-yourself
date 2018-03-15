@@ -1,0 +1,45 @@
+{
+  "configVersion": 1,
+  "index": "/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "urls": [
+        "/favicon.ico",
+        "/index.html",
+        "/inline.318b50c57b4eba3d437b.bundle.js",
+        "/main.5ab9ba9fb2e4efd78c41.bundle.js",
+        "/polyfills.2950a823eb703fb6f085.bundle.js",
+        "/styles.dc9f44cb82f8f3b2349e.bundle.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "urls": [
+        "/assets/icon.svg",
+        "/assets/icon513.png",
+        "/assets/SEGOEUI.TTF"
+      ],
+      "patterns": [
+        "https:\\/\\/fonts\\.googleapis\\.com\\/.*"
+      ]
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/inline.318b50c57b4eba3d437b.bundle.js": "998c6060446975e566fd17509558ddc68d72eec3",
+    "/assets/icon.svg": "cebd421a8cc5d1c98805a412f488fc4160749410",
+    "/main.5ab9ba9fb2e4efd78c41.bundle.js": "9a26dc9f4265118056ea7c09333c4cb9b65388f0",
+    "/assets/icon513.png": "61d820e48deb088e4fee8939fcbe27b0d9dc52ce",
+    "/polyfills.2950a823eb703fb6f085.bundle.js": "e7567c8117f5d34b42f39ec33c2fcb7f1af13ba8",
+    "/assets/SEGOEUI.TTF": "280935e382b62fe953a4efe09b2bbf8d34b0f14a",
+    "/styles.dc9f44cb82f8f3b2349e.bundle.css": "31557b20e6055f6449bc6216c1f129f935fc1a04",
+    "/favicon.ico": "c323ef50da1302c6ba6becb81639eeedbfcd6c99",
+    "/index.html": "f22a2d07d06508cedbf38cceb3aeeb23836b7d37"
+  }
+}
