@@ -23,9 +23,9 @@ app.get('*', (req, res) => {
 });
 
 //Set Port
-const port = process.env.PORT || 'log-yourself.herokuapp.com';
+const port = process.env.PORT || '3000';
 app.set('port', port);
 
 const server = http.createServer(app);
 
-server.listen(port, 'log-yourself.herokuapp.com', () => console.log(`Running on localhost:${port}`));
+server.listen(port, log-yourself.herokuapp.com, () => console.log(`Running on localhost:${port}`));
