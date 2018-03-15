@@ -32,7 +32,7 @@ router.post('/logs', (req, res) => {
 
 // Get Work Logs
 router.post('/logs/work', (req, res) => {
-  console.log("Receive request for /logs/work");
+  // console.log("Receive request for /logs/work");
   db.logs.find({ "type": "work" }).sort({ "week": 1 }, (err, users) => {
     if (err) return next(err);
     response.data = users;
@@ -64,7 +64,7 @@ router.post('/log', (req, res) => {
 
 // Delete log
 router.post('/delete/:id', (req, res) => {
-  console.log("Received DELETE request");
+  // console.log("Received DELETE request");
   console.log(req.params.id);
   db.logs.remove({
     _id: mongojs.ObjectId(req.params.id)}, (err, users) => {
@@ -77,8 +77,8 @@ router.post('/delete/:id', (req, res) => {
 
 // Update log
 router.put('/update/:id', (req, res) => {
-  console.log("Received UPDATE request");
-  console.log(req.body);
+  // console.log("Received UPDATE request");
+  // console.log(req.body);
   const bodyToUpdate = {
     '_id': mongojs.ObjectId(req.params.id),
     'week': req.body.week,
@@ -93,7 +93,7 @@ router.put('/update/:id', (req, res) => {
     if (err) return next(err);
     response.data = logs;
     res.json(response);
-    console.log(response);
+    // console.log(response);
   });
 });
 
