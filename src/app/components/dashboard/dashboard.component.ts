@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit {
   formSuccesfullySubmited = false;
   updateLog: {};
   addLog = {
-    text: 'aa'
+    text: ''
   };
   log: {
     week: number,
