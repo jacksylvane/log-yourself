@@ -311,7 +311,7 @@ initDelete(i, id) {
     }
     console.log(this.newLog);
     this.logs.push(this.newLog);
-    // this._logsService.insertLog(this.newLog);
+    this._logsService.insertLog(this.newLog);
     this.showAlert('Log has been added! 📃💪🎉');
     this.getFakeLogs();
   }
