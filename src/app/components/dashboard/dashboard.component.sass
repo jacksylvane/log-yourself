@@ -21,7 +21,7 @@
     transition: all 0.2s ease-in-out
     background: linear-gradient(#2b8368, #35876e)
   .filterBtns
-    margin: 2.5rem 0 2rem 0
+    margin: 2.5rem 1rem 2rem 1rem
     text-align: center 
 .btn
   border: none
@@ -154,6 +154,7 @@
   background: #F0F0F0
   border-radius: 3px
   margin: 2rem auto
+  min-width: 100%
   .btn.active
     background: #065c3d
     border-bottom: transparent
@@ -278,7 +279,7 @@
     left: 13px
     height: 2px
     font-size: 16px
-    color: #26cab1
+    color: #ffffff
   &:after
     content: 'Work'
     position: absolute
@@ -367,6 +368,8 @@ input[type=checkbox]
     .card.logs
       grid-column: span 6
       padding: 1rem 0
+      .filterBtns
+        margin: 2.5rem 0rem 2rem 0rem
       .logs-header
         width: 100%
         margin-left: 0rem
