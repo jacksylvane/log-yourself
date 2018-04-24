@@ -4,6 +4,7 @@ import { easeInOut, expandCard } from '../../animations';
 import { WeekPipe } from '../../pipes/week.pipe';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NavbarComponent } from '../navbar/navbar.component';
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -14,10 +15,11 @@ import { NavbarComponent } from '../navbar/navbar.component';
   ],
   providers: [ WeekPipe ]
 })
+
 export class DashboardComponent implements OnInit {
   myForm: FormGroup;
   today = Date.now();
-  userIdofCurrent = { 'userId': '72315f' };
+  userIdofCurrent = { 'userId': '72315x' };
   formSuccesfullySubmited = false;
   updateLog: {};
   addLog = {
@@ -94,8 +96,6 @@ export class DashboardComponent implements OnInit {
             this.logs[i].dayEntries = this.logs[i].days.length;
           } else {
             this.logs[i].dayEntries = 0;
-            /*   const text = { 'text': 'hee' };
-            this.logs[i].days = new Array(text); */
           }
           if (this.logs[i].text === '') {
             this.logs[i].weekEntries = 0;
@@ -104,7 +104,6 @@ export class DashboardComponent implements OnInit {
           }
           if (typeof (this.logs[i].text) === typeof (Array())) {
             this.logs[i].weekEntries = this.logs[i].text.length;
-            // this.logs[i].text = this.logs[i].text[0].text;
           }
           if (typeof (this.logs[i].text) === typeof (String())) {
             this.logs[i].text = [{'id': 0, 'text': this.logs[i].text}];
@@ -115,62 +114,42 @@ export class DashboardComponent implements OnInit {
             this.logs[i].textToshow = this.logs[i].text[0].text;
           }
         }
-  /*       this.logs.forEach(function (obj) {
-          if (obj.type === 'work') {
-            obj.typeInitial = 'W';
-          } else {
-            obj.typeInitial = 'P';
-          }
-        }); */
-        // console.log(this.logs);
       });
   }
   getFakeLogs() {
     this.currentShowbtn = 0;
-        for (let i = 0; i < this.logs.length; i++) {
-          this.logs[i].weekStart = this.getDateOfWeek(this.logs[i].week, 2017);
-          this.logs[i].weekEnd = this.getEndingDateOfWeek(this.logs[i].week, 2017);
-          this.logs[i].showText = false;
-          if ('days' in this.logs[i]) {
-            this.logs[i].dayEntries = this.logs[i].days.length;
-          } else {
-            this.logs[i].dayEntries = 0;
-            /*   const text = { 'text': 'hee' };
-            this.logs[i].days = new Array(text); */
-          }
-          if (this.logs[i].text === '') {
-            this.logs[i].weekEntries = 0;
-          } else {
-            this.logs[i].weekEntries = 1;
-          }
-          if (typeof (this.logs[i].text) === typeof (Array())) {
-            this.logs[i].weekEntries = this.logs[i].text.length;
-            // this.logs[i].text = this.logs[i].text[0].text;
-          }
-          if (typeof (this.logs[i].text) === typeof (String())) {
-            this.logs[i].text = [{'id': 0, 'text': this.logs[i].text}];
-          }
-          if (this.logs[i].text.length === 0) {
-            this.logs[i].textToshow = this.logs[i].days[0].text;
-          } else {
-            this.logs[i].textToshow = this.logs[i].text[0].text;
-          }
-        }
-  /*       this.logs.forEach(function (obj) {
-          if (obj.type === 'work') {
-            obj.typeInitial = 'W';
-          } else {
-            obj.typeInitial = 'P';
-          }
-        }); */
-        // console.log(this.logs);
+    for (let i = 0; i < this.logs.length; i++) {
+      this.logs[i].weekStart = this.getDateOfWeek(this.logs[i].week, 2017);
+      this.logs[i].weekEnd = this.getEndingDateOfWeek(this.logs[i].week, 2017);
+      this.logs[i].showText = false;
+      if ('days' in this.logs[i]) {
+        this.logs[i].dayEntries = this.logs[i].days.length;
+      } else {
+        this.logs[i].dayEntries = 0;
+      }
+      if (this.logs[i].text === '') {
+        this.logs[i].weekEntries = 0;
+      } else {
+        this.logs[i].weekEntries = 1;
+      }
+      if (typeof (this.logs[i].text) === typeof (Array())) {
+        this.logs[i].weekEntries = this.logs[i].text.length;
+      }
+      if (typeof (this.logs[i].text) === typeof (String())) {
+        this.logs[i].text = [{'id': 0, 'text': this.logs[i].text}];
+      }
+      if (this.logs[i].text.length === 0) {
+        this.logs[i].textToshow = this.logs[i].days[0].text;
+      } else {
+        this.logs[i].textToshow = this.logs[i].text[0].text;
+      }
+    }
   }
   showWorkLogs() {
     this.currentShowbtn = 1;
     this._logsService.getWorkLogs(this.userIdofCurrent.userId)
     .subscribe((res) => {
       this.logs = res;
-      // console.log(this.logs);
         for (let i = 0; i < this.logs.length; i++) {
           this.logs[i].weekStart = this.getDateOfWeek(this.logs[i].week, 2017);
           this.logs[i].weekEnd = this.getEndingDateOfWeek(this.logs[i].week, 2017);
@@ -179,8 +158,6 @@ export class DashboardComponent implements OnInit {
             this.logs[i].dayEntries = this.logs[i].days.length;
           } else {
             this.logs[i].dayEntries = 0;
-          /*   const text = { 'text': 'hee' };
-            this.logs[i].days = new Array(text); */
           }
           if (this.logs[i].text === '') {
             this.logs[i].weekEntries = 0;
@@ -205,8 +182,6 @@ export class DashboardComponent implements OnInit {
             this.logs[i].dayEntries = this.logs[i].days.length;
           } else {
             this.logs[i].dayEntries = 0;
-            /*   const text = { 'text': 'hee' };
-              this.logs[i].days = new Array(text); */
           }
           if (this.logs[i].text === '') {
             this.logs[i].weekEntries = 0;
@@ -217,7 +192,7 @@ export class DashboardComponent implements OnInit {
       });
   }
 
-/* Determines color of card header based on type of a log */
+/* Determines color of a card header based on type of a log */
   getClass(type) {
     if (type.type === 'personal') {
       return 'personal';
@@ -225,6 +200,7 @@ export class DashboardComponent implements OnInit {
       return 'work';
     }
   }
+
 getActiveClass( index, letter, text) {
   if (Array.isArray(text)) {
     if (text.length === 0) {
@@ -247,7 +223,7 @@ initDelete(i, id) {
 /* Deletes log based on stored variable created by initDelete() */
   deleteLog(i, id) {
     this.showConfirmDelete = false;
-    // this._logsService.deleteLog(this.logToDeleteId);
+    this._logsService.deleteLog(this.logToDeleteId);
     this.logs.splice(this.logToDeleteIndex, 1);
     this.showAlert('Log has been deleted! 💣🗑️' );
   }
@@ -268,6 +244,7 @@ initDelete(i, id) {
       x.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }, 200);
   }
+
   onSubmit(f: FormGroup) {
     const type = f.value.type ? 'personal' : 'work';
     const week = f.value.week ? parseInt(f.value.week, 10) : this.weekPipe.transform(new Date(this.today));
@@ -298,7 +275,6 @@ initDelete(i, id) {
         text: [],
         days: [{ 'day': f.value.day, 'text': f.value.text }]
       };
-      // console.log('Insert 1');
     } else {
       this.newLog = {
         week: week,
@@ -307,7 +283,6 @@ initDelete(i, id) {
         text: f.value.text,
         days: []
       };
-      // console.log('Insert 2');
     }
     console.log(this.newLog);
     this.logs.push(this.newLog);
@@ -336,7 +311,6 @@ initDelete(i, id) {
            console.log('Insert 3');
         } else {
           if (typeof (this.logs[i].text) === typeof (Array())) {
-            // newWeekArray = this.logs[i].text;
             console.log(this.logs[i].text);
             const newWeekToPush = { 'id': 1, 'text': f.value.text };
             this.logs[i].text.push(newWeekToPush);
@@ -374,6 +348,7 @@ initDelete(i, id) {
       }
     }
   }
+
   ngOnInit() {
     this.myForm = this.fb.group({
       type: '',
@@ -382,5 +357,4 @@ initDelete(i, id) {
       text: ['', Validators.required]
     });
   }
-
 }

@@ -78,7 +78,6 @@ router.post('/delete/:id', (req, res) => {
 // Update log
 router.put('/update/:id', (req, res) => {
   // console.log("Received UPDATE request");
-  // console.log(req.body);
   const bodyToUpdate = {
     '_id': mongojs.ObjectId(req.params.id),
     'week': req.body.week,
@@ -93,7 +92,6 @@ router.put('/update/:id', (req, res) => {
     if (err) return next(err);
     response.data = logs;
     res.json(response);
-    // console.log(response);
   });
 });
 

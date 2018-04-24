@@ -34,7 +34,7 @@ export class LogsService {
         });
     });
   }
-// Should switch do DELETE request? Post asks two parameters?
+
   deleteLog(id) {
     return new Promise((resolve, reject) => {
       this._http.post('/api/delete/' + id , id)
