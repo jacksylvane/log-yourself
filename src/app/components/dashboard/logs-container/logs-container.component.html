@@ -1,0 +1,50 @@
+<div class="card logs">
+  <div class="logs-header card-header"> Your weekly logs</div>
+  <div class="filterBtns">
+    <button class="btn" [class.active]="this.currentShowbtn == 0" (click)="getAllLogs();">All</button>
+    <button class="btn" [class.active]="this.currentShowbtn == 1" (click)="showWorkLogs()">Work</button>
+    <button class="btn" [class.active]="this.currentShowbtn == 2" (click)="showPersonalLogs()">Personal</button>
+  </div>
+  <app-search></app-search>
+  <div class="entriesCards">
+    <div class="log" *ngFor="let log of logs; let i = index" [ngClass]="getClass(log)" [class.expand]="this.logs[i].showText"
+      (click)="expandCard(i, $event)">
+      <h3>Week: {{log.week}}</h3>
+      <h4>{{log.type}}</h4>
+      <p>{{log.weekStart | date:'dd.MM'}} - {{log.weekEnd | date:'dd.MM'}}</p>
+      <div class="entriesCount">
+        <span>{{log.weekEntries}} week entry</span>
+        <span>{{log.dayEntries}} daily entries</span>
+      </div>
+      <div *ngIf="log.showText" class="textWindow">
+        <div *ngIf="log.days" class="entries">
+          <div class="weeks-btns">
+            <button *ngFor="let text of log.text; index as k" class="btn entryBtn" id="yo" [ngClass]="getActiveClass(k, 'k')" (click)="log.textToshow = text.text; this.current.number = k; this.current.index = 'k'">
+              Entry {{[k + 1]}}.
+            </button>
+          </div>
+          <div class="days-btns">
+            <button *ngFor="let day of log.days; index as j" class="btn entryBtn" [ngClass]="getActiveClass(j, 'j', log.text)" (click)="log.textToshow = day.text; this.current.number = j; this.current.index = 'j'">
+              {{day.day}}
+            </button>
+          </div>
+        </div>
+        <div class="text unique" id="unique" @expandCard [attr.data-index]="i">
+          {{log.textToshow}}
+        </div>
+        <div class="buttonDelete">
+          <button type="button" class="btn  btn-delete" id="deleteBtn" (click)="initDelete(i, log._id)">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div *ngIf="showConfirmDelete" class="confirm-delete">
+      <div class="confirmPopup">
+        <div class="text">
+          Do you really want to delete this log?
+        </div>
+        <button type="button" class="btn btn-delete" (click)="deleteLog(i, id)">DELETE</button>
+        <button type="button" class="btn btn-cancel" (click)="this.showConfirmDelete = false">CANCEL</button>
+      </div>
+    </div>
+</div>

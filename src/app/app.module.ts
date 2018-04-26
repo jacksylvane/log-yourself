@@ -10,9 +10,15 @@ import { HttpModule } from '@angular/http';
 import { LogsService } from './services/logs.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { WeekPipe } from './pipes/week.pipe';
+import { FilterPipe } from './pipes/search.pipe';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { AddLogComponent } from './components/dashboard/add-log/add-log.component';
+import { NotificationService } from './services/notification.service';
+import { NotificationsComponent } from './components/notifications/notifications.component';
+import { LogsContainerComponent } from './components/dashboard/logs-container/logs-container.component';
+import { SearchComponent } from './components/dashboard/logs-container/search/search.component';
 
 
 @NgModule({
@@ -20,7 +26,12 @@ import { environment } from '../environments/environment';
     AppComponent,
     DashboardComponent,
     WeekPipe,
-    NavbarComponent
+    NavbarComponent,
+    AddLogComponent,
+    NotificationsComponent,
+    LogsContainerComponent,
+    SearchComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
@@ -33,7 +44,7 @@ import { environment } from '../environments/environment';
       enabled: environment.production
     })
   ],
-  providers: [LogsService],
+  providers: [LogsService, NotificationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

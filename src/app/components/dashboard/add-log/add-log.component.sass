@@ -1,0 +1,187 @@
+// add-log component does not know what class does parent component has
+ // /:host
+//   .tiny
+//     .card-header
+//       text-align: center    
+form
+  color: var(--black)
+  margin-top: 2rem
+  #inputsContainer
+    width: 95%
+    margin: 0 auto
+    .type
+      display: inline-flex
+      justify-content: space-between
+      width: 15rem
+      align-items: center
+      margin-bottom: 2rem
+    .date
+      display: inline-flex
+      justify-content: space-between
+      width: 100%
+      margin-bottom: 1rem
+      .maxValue-alert
+        font-size: 0.8rem
+        position: absolute
+        margin-top: -0.4rem
+      div
+        label
+          margin-right: 1rem
+        input
+          padding: 0.5rem 0.5rem
+          border: none
+          width: 4rem
+          text-align: center
+          font-weight: 700
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03)
+          border-radius: 2px 
+          font-family: Open Sans
+          color: var(--black)
+          &:focus
+            outline: none
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) 
+      &>:nth-child(2)
+        input    
+          width: 10rem
+    p
+      display: flex;
+      justify-content: space-evenly;  
+    input
+      margin-bottom: 1rem
+  .textInput
+    display: flex
+    flex-flow: column
+    textarea
+      width: 95%
+      min-height: 15rem
+      padding: 0.5rem 0.75rem
+      line-height: 170%
+      font-family: "Open Sans"
+      margin: 0 auto 2rem auto
+      border-radius: 2px
+      border: none
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.10) 
+      &:focus
+        width: 97%
+        outline: none
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.10)
+        min-height: 15.2rem
+        transition: all .4s ease
+    .fillAlert
+      text-align: center
+      font-size: 0.9rem
+      color: #e95252
+      font-weight: 600
+      margin-bottom: 2rem
+  .btn-div
+    display: flex
+    justify-content: flex-end
+
+.checkboxThree
+  width: 180px
+  height: 40px
+  background: linear-gradient(#2f9173, #3e9b7f)
+  border-radius: 10px
+  position: relative
+  &:before
+    content: 'Personal'
+    position: absolute
+    top: 12px
+    left: 13px
+    height: 2px
+    font-size: 16px
+    color: #ffffff
+  &:after
+    content: 'Work'
+    position: absolute
+    top: 12px
+    left: 113px
+    height: 2px
+    color: white
+    font-size: 16px
+  label
+    display: block
+    width: 80px
+    height: 22px
+    border-radius: 5px
+    transition: all .5s ease
+    cursor: pointer
+    position: absolute
+    top: 9px
+    z-index: 1
+    left: 12px
+    background: #fff
+    box-shadow: 0 2px 1px 0px rgba(0, 0, 0, 0.18)
+  input[type=checkbox]:checked + label
+    left: 87px
+    background: #26cab1
+
+input[type=checkbox]
+  visibility: hidden
+
+
+@media only screen and (min-width: 500px) and (max-width: 1000px)
+  .container
+    padding: 0 1rem
+    grid-gap: 1rem
+    .card.logs
+      grid-column: span 3
+      padding: 1rem 0
+      .logs-header
+        width: 100%
+        margin-left: 0rem
+      .log
+        width: 46%
+        padding: 2rem 1.25rem
+        margin: 0 0.3rem 3rem 0.3rem
+      .giant
+        grid-column: span 6   
+      .expand
+        width: 100% !important
+    .addLog
+      grid-column: span 3
+
+@media only screen and (max-width: 720px)
+  .container
+    padding: 0 0.5rem
+    .addLog
+      #inputsContainer
+        .type
+          width: 90%
+        .date
+          input
+            margin-top: 0.5rem
+    .tiny
+      grid-column: span 1                
+    .card.logs
+      grid-column: span 6
+      padding: 1rem 0
+      .filterBtns
+        margin: 2.5rem 0rem 2rem 0rem
+      .logs-header
+        width: 100%
+        margin-left: 0rem
+      .log
+        width: 46%
+        padding: 1.75rem 1.25rem
+        margin: 0 0.3rem 3rem 0.3rem
+        .entriesCount
+          display: flex
+          flex-flow: column
+          margin-top: 1.8rem
+          text-align: right
+          font-size: 0.85rem
+          span:first-child
+            margin-bottom: .5rem
+        h4
+          top: 2rem
+          right: 1rem
+      .giant
+        grid-column: span 6         
+      .expand
+        width: 100% !important
+    .addLog
+      grid-column: span 6
+  .confirm-delete
+    .confirmPopup
+      padding: 4rem 2.5rem   
