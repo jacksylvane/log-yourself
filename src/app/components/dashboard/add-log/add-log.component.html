@@ -1,4 +1,4 @@
-  <div class="addLog-header card-header" (click)="onSelectStory()" > Add entry</div>
+  <div class="addLog-header card-header" (click)="onSelectStory()" id="addLog"> Add entry</div>
   <form *ngIf="showAddLog" [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
     <div id="inputsContainer" >
       <div class="type">
@@ -24,11 +24,11 @@
       </div>
     </div>
     <div class="textInput">
-      <textarea type="text" formControlName="text" [(ngModel)]=addLog.text></textarea>
+      <textarea type="text" formControlName="text" [(ngModel)]=addLog.text id="text"></textarea>
       <div class="fillAlert" *ngIf="myForm.get('text').hasError('required') && myForm.get('text').touched">Please fill out text area with your lovely words.</div>
     </div>
     <div class="btn-div">
-      <button type="submit" class="btn" [disabled]="!myForm.valid" [class.disabled]="!myForm.valid">Submit</button>
+      <button type="submit" class="btn submit-btn" [disabled]="!myForm.valid" [class.disabled]="!myForm.valid">Submit</button>
       <!-- <button type="button" class="btn" (click)="increment()">SubmitFake</button>
       <p>Counter : {{counter | async}}</p> -->
     </div>

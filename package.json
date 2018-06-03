@@ -8,8 +8,9 @@
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "ndm": "mongod"
+    "e2e": "testcafe chrome index.js",
+    "ndm": "mongod",
+    "testcafe" : "testcafe chrome index.js -s test-results"
   },
   "private": true,
   "dependencies": {

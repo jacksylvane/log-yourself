@@ -9,7 +9,8 @@ test('My first test', async t => {
     .click('#addLog')
     .typeText('#text', 'John Smith')
     .click('.submit-btn')
+    .wait(300)
     .takeScreenshot('test-screenshot.png')
     // Use the assertion to check if the actual header text is equal to the expected one
-    // .expect(Selector('#article-header').innerText).eql('Thank you, John Smith!');
+    .expect(Selector('#alert').innerText).contains('Log has been added!');
 });

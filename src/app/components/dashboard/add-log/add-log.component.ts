@@ -39,7 +39,7 @@ export class AddLogComponent implements OnInit {
     private _notificationService: NotificationService,
     private fb: FormBuilder, private weekPipe: WeekPipe,
     ) {
-      // this.getAllLogs();
+      this.getAllLogs();
     }
     @Input() userIdofCurrent;
     @Input() showAddLog: string;
@@ -52,12 +52,12 @@ export class AddLogComponent implements OnInit {
   onSelectStory() {
     this.selectStory.emit(true);
   }
-  // getAllLogs() {
-  //   this._logsService.getAllLogs(this.userIdofCurrent)
-  //     .subscribe((res) => {
-  //       this.logs = res;
-  //   });
-  // }
+  getAllLogs() {
+    this._logsService.getAllLogs(this.userIdofCurrent)
+      .subscribe((res) => {
+        this.logs = res;
+    });
+  }
   onSubmit(f: FormGroup) {
     const type = f.value.type ? 'personal' : 'work';
     const week = f.value.week ? parseInt(f.value.week, 10) : this.weekPipe.transform(new Date(this.today));
