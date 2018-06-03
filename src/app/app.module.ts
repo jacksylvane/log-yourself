@@ -19,6 +19,7 @@ import { NotificationService } from './services/notification.service';
 import { NotificationsComponent } from './components/notifications/notifications.component';
 import { LogsContainerComponent } from './components/dashboard/logs-container/logs-container.component';
 import { SearchComponent } from './components/dashboard/logs-container/search/search.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 // import { NgRedux, NgReduxModule } from '@angular-redux/store';
 // import { IAppState, rootReducer, INITIAL_STATE } from './store';
 
@@ -32,7 +33,8 @@ import { SearchComponent } from './components/dashboard/logs-container/search/se
     NotificationsComponent,
     LogsContainerComponent,
     SearchComponent,
-    FilterPipe
+    FilterPipe,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,

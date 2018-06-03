@@ -143,6 +143,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _components_dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/dashboard/dashboard.component */ "./src/app/components/dashboard/dashboard.component.ts");
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var _components_not_found_not_found_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/not-found/not-found.component */ "./src/app/components/not-found/not-found.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -153,8 +154,11 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
 var routes = [
-    { path: '**', component: _components_dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_2__["DashboardComponent"] },
+    { path: '', component: _components_dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_2__["DashboardComponent"] },
+    { path: 'dashboard', component: _components_dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_2__["DashboardComponent"] },
+    { path: '**', component: _components_not_found_not_found_component__WEBPACK_IMPORTED_MODULE_4__["NotFoundComponent"] }
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {
@@ -260,12 +264,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_notifications_notifications_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/notifications/notifications.component */ "./src/app/components/notifications/notifications.component.ts");
 /* harmony import */ var _components_dashboard_logs_container_logs_container_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/dashboard/logs-container/logs-container.component */ "./src/app/components/dashboard/logs-container/logs-container.component.ts");
 /* harmony import */ var _components_dashboard_logs_container_search_search_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/dashboard/logs-container/search/search.component */ "./src/app/components/dashboard/logs-container/search/search.component.ts");
+/* harmony import */ var _components_not_found_not_found_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/not-found/not-found.component */ "./src/app/components/not-found/not-found.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -302,7 +308,8 @@ var AppModule = /** @class */ (function () {
                 _components_notifications_notifications_component__WEBPACK_IMPORTED_MODULE_16__["NotificationsComponent"],
                 _components_dashboard_logs_container_logs_container_component__WEBPACK_IMPORTED_MODULE_17__["LogsContainerComponent"],
                 _components_dashboard_logs_container_search_search_component__WEBPACK_IMPORTED_MODULE_18__["SearchComponent"],
-                _pipes_search_pipe__WEBPACK_IMPORTED_MODULE_10__["FilterPipe"]
+                _pipes_search_pipe__WEBPACK_IMPORTED_MODULE_10__["FilterPipe"],
+                _components_not_found_not_found_component__WEBPACK_IMPORTED_MODULE_19__["NotFoundComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
@@ -334,7 +341,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "  <div class=\"addLog-header card-header\" (click)=\"onSelectStory()\" > Add entry</div>\n  <form *ngIf=\"showAddLog\" [formGroup]=\"myForm\" (ngSubmit)=\"onSubmit(myForm)\">\n    <div id=\"inputsContainer\" >\n      <div class=\"type\">\n        Type:\n        <div class=\"checkboxThree\">\n          <input type=\"checkbox\" formControlName=\"type\" id=\"checkboxThreeInput\" />\n          <label for=\"checkboxThreeInput\">\n          </label>\n        </div>\n      </div>\n      <div class=\"date\">\n        <div>\n          <label for=\"week\">Week:</label>\n          <input type=\"text\" formControlName=\"week\" placeholder=\"{{today | week }}\">\n          <div class=\"maxValue-alert\" *ngIf=\"myForm.get('week').hasError('max')\">\n            There are only 52 weeks in a year.\n          </div>\n        </div>\n        <div>\n          <label for=\"day\">Day:</label>\n          <input type=\"text\" formControlName=\"day\" [(ngModel)]=addLog.day>\n        </div>\n      </div>\n    </div>\n    <div class=\"textInput\">\n      <textarea type=\"text\" formControlName=\"text\" [(ngModel)]=addLog.text></textarea>\n      <div class=\"fillAlert\" *ngIf=\"myForm.get('text').hasError('required') && myForm.get('text').touched\">Please fill out text area with your lovely words.</div>\n    </div>\n    <div class=\"btn-div\">\n      <button type=\"submit\" class=\"btn\" [disabled]=\"!myForm.valid\" [class.disabled]=\"!myForm.valid\">Submit</button>\n      <!-- <button type=\"button\" class=\"btn\" (click)=\"increment()\">SubmitFake</button>\n      <p>Counter : {{counter | async}}</p> -->\n    </div>\n  </form>"
+module.exports = "  <div class=\"addLog-header card-header\" (click)=\"onSelectStory()\" > Add entry</div>\r\n  <form *ngIf=\"showAddLog\" [formGroup]=\"myForm\" (ngSubmit)=\"onSubmit(myForm)\">\r\n    <div id=\"inputsContainer\" >\r\n      <div class=\"type\">\r\n        Type:\r\n        <div class=\"checkboxThree\">\r\n          <input type=\"checkbox\" formControlName=\"type\" id=\"checkboxThreeInput\" />\r\n          <label for=\"checkboxThreeInput\">\r\n          </label>\r\n        </div>\r\n      </div>\r\n      <div class=\"date\">\r\n        <div>\r\n          <label for=\"week\">Week:</label>\r\n          <input type=\"text\" formControlName=\"week\" placeholder=\"{{today | week }}\">\r\n          <div class=\"maxValue-alert\" *ngIf=\"myForm.get('week').hasError('max')\">\r\n            There are only 52 weeks in a year.\r\n          </div>\r\n        </div>\r\n        <div>\r\n          <label for=\"day\">Day:</label>\r\n          <input type=\"text\" formControlName=\"day\" [(ngModel)]=addLog.day>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"textInput\">\r\n      <textarea type=\"text\" formControlName=\"text\" [(ngModel)]=addLog.text></textarea>\r\n      <div class=\"fillAlert\" *ngIf=\"myForm.get('text').hasError('required') && myForm.get('text').touched\">Please fill out text area with your lovely words.</div>\r\n    </div>\r\n    <div class=\"btn-div\">\r\n      <button type=\"submit\" class=\"btn\" [disabled]=\"!myForm.valid\" [class.disabled]=\"!myForm.valid\">Submit</button>\r\n      <!-- <button type=\"button\" class=\"btn\" (click)=\"increment()\">SubmitFake</button>\r\n      <p>Counter : {{counter | async}}</p> -->\r\n    </div>\r\n  </form>"
 
 /***/ }),
 
@@ -724,7 +731,7 @@ var DashboardComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"card logs\">\n  <div class=\"logs-header card-header\"> Your weekly logs</div>\n  <div class=\"filterBtns\">\n    <button class=\"btn\" [class.active]=\"this.currentShowbtn == 0\" (click)=\"getAllLogs();\">All</button>\n    <button class=\"btn\" [class.active]=\"this.currentShowbtn == 1\" (click)=\"showWorkLogs()\">Work</button>\n    <button class=\"btn\" [class.active]=\"this.currentShowbtn == 2\" (click)=\"showPersonalLogs()\">Personal</button>\n  </div>\n  <app-search></app-search>\n  <div class=\"entriesCards\">\n    <div class=\"log\" *ngFor=\"let log of logs; let i = index\" [ngClass]=\"getClass(log)\" [class.expand]=\"this.logs[i].showText\"\n      (click)=\"expandCard(i, $event)\">\n      <h3>Week: {{log.week}}</h3>\n      <h4>{{log.type}}</h4>\n      <p>{{log.weekStart | date:'dd.MM'}} - {{log.weekEnd | date:'dd.MM'}}</p>\n      <div class=\"entriesCount\">\n        <span>{{log.weekEntries}} week entry</span>\n        <span>{{log.dayEntries}} daily entries</span>\n      </div>\n      <div *ngIf=\"log.showText\" class=\"textWindow\">\n        <div *ngIf=\"log.days\" class=\"entries\">\n          <div class=\"weeks-btns\">\n            <button *ngFor=\"let text of log.text; index as k\" class=\"btn entryBtn\" id=\"yo\" [ngClass]=\"getActiveClass(k, 'k')\" (click)=\"log.textToshow = text.text; this.current.number = k; this.current.index = 'k'\">\n              Entry {{[k + 1]}}.\n            </button>\n          </div>\n          <div class=\"days-btns\">\n            <button *ngFor=\"let day of log.days; index as j\" class=\"btn entryBtn\" [ngClass]=\"getActiveClass(j, 'j', log.text)\" (click)=\"log.textToshow = day.text; this.current.number = j; this.current.index = 'j'\">\n              {{day.day}}\n            </button>\n          </div>\n        </div>\n        <div class=\"text unique\" id=\"unique\" @expandCard [attr.data-index]=\"i\">\n          {{log.textToshow}}\n        </div>\n        <div class=\"buttonDelete\">\n          <button type=\"button\" class=\"btn  btn-delete\" id=\"deleteBtn\" (click)=\"initDelete(i, log._id)\">Delete</button>\n        </div>\n      </div>\n    </div>\n  </div>\n    <div *ngIf=\"showConfirmDelete\" class=\"confirm-delete\">\n      <div class=\"confirmPopup\">\n        <div class=\"text\">\n          Do you really want to delete this log?\n        </div>\n        <button type=\"button\" class=\"btn btn-delete\" (click)=\"deleteLog(i, id)\">DELETE</button>\n        <button type=\"button\" class=\"btn btn-cancel\" (click)=\"this.showConfirmDelete = false\">CANCEL</button>\n      </div>\n    </div>\n</div>"
+module.exports = "<div class=\"card logs\">\r\n  <div class=\"logs-header card-header\"> Your weekly logs</div>\r\n  <div class=\"filterBtns\">\r\n    <button class=\"btn\" [class.active]=\"this.currentShowbtn == 0\" (click)=\"getAllLogs();\">All</button>\r\n    <button class=\"btn\" [class.active]=\"this.currentShowbtn == 1\" (click)=\"showWorkLogs()\">Work</button>\r\n    <button class=\"btn\" [class.active]=\"this.currentShowbtn == 2\" (click)=\"showPersonalLogs()\">Personal</button>\r\n  </div>\r\n  <app-search></app-search>\r\n  <div class=\"entriesCards\">\r\n    <div class=\"log\" *ngFor=\"let log of logs; let i = index\" [ngClass]=\"getClass(log)\" [class.expand]=\"this.logs[i].showText\"\r\n      (click)=\"expandCard(i, $event)\">\r\n      <h3>Week: {{log.week}}</h3>\r\n      <h4>{{log.type}}</h4>\r\n      <p>{{log.weekStart | date:'dd.MM'}} - {{log.weekEnd | date:'dd.MM'}}</p>\r\n      <div class=\"entriesCount\">\r\n        <span>{{log.weekEntries}} week entry</span>\r\n        <span>{{log.dayEntries}} daily entries</span>\r\n      </div>\r\n      <div *ngIf=\"log.showText\" class=\"textWindow\">\r\n        <div *ngIf=\"log.days\" class=\"entries\">\r\n          <div class=\"weeks-btns\">\r\n            <button *ngFor=\"let text of log.text; index as k\" class=\"btn entryBtn\" id=\"yo\" [ngClass]=\"getActiveClass(k, 'k')\" (click)=\"log.textToshow = text.text; this.current.number = k; this.current.index = 'k'\">\r\n              Entry {{[k + 1]}}.\r\n            </button>\r\n          </div>\r\n          <div class=\"days-btns\">\r\n            <button *ngFor=\"let day of log.days; index as j\" class=\"btn entryBtn\" [ngClass]=\"getActiveClass(j, 'j', log.text)\" (click)=\"log.textToshow = day.text; this.current.number = j; this.current.index = 'j'\">\r\n              {{day.day}}\r\n            </button>\r\n          </div>\r\n        </div>\r\n        <div class=\"text unique\" id=\"unique\" @expandCard [attr.data-index]=\"i\">\r\n          {{log.textToshow}}\r\n        </div>\r\n        <div class=\"buttonDelete\">\r\n          <button type=\"button\" class=\"btn  btn-delete\" id=\"deleteBtn\" (click)=\"initDelete(i, log._id)\">Delete</button>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n    <div *ngIf=\"showConfirmDelete\" class=\"confirm-delete\">\r\n      <div class=\"confirmPopup\">\r\n        <div class=\"text\">\r\n          Do you really want to delete this log?\r\n        </div>\r\n        <button type=\"button\" class=\"btn btn-delete\" (click)=\"deleteLog(i, id)\">DELETE</button>\r\n        <button type=\"button\" class=\"btn btn-cancel\" (click)=\"this.showConfirmDelete = false\">CANCEL</button>\r\n      </div>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
@@ -1101,6 +1108,69 @@ var NavbarComponent = /** @class */ (function () {
         __metadata("design:paramtypes", [])
     ], NavbarComponent);
     return NavbarComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/components/not-found/not-found.component.html":
+/*!***************************************************************!*\
+  !*** ./src/app/components/not-found/not-found.component.html ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"404-container\">\r\n  <h1>Oops, we didn't quite find what you are looking for.</h1>\r\n  <h2>But we offer this puppy as a comforting buddy.</h2>\r\n  <img src=\"../../../assets/puppy.jpg\" alt=\"Adorable puppy\">\r\n  <h2>How about checking our dashboard though?</h2>\r\n  <a href=\"#\" routerLink=\"/dashboard\">Dashboard</a>\r\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/components/not-found/not-found.component.sass":
+/*!***************************************************************!*\
+  !*** ./src/app/components/not-found/not-found.component.sass ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "div {\n  text-align: center;\n  padding: 3rem;\n  line-height: 2rem;\n  color: #0b7660; }\n  div h1 {\n    font-size: 1.75rem;\n    margin-bottom: 1rem; }\n  div h2 {\n    font-size: 1.25rem; }\n  a {\n  display: block;\n  background: linear-gradient(#c33e3e, #a03233);\n  width: -webkit-max-content;\n  width: -moz-max-content;\n  width: max-content;\n  padding: 1rem;\n  color: white;\n  text-decoration: none;\n  border-radius: 3px;\n  margin: 0 auto;\n  margin-top: 2rem; }\n  img {\n  max-height: 50vh;\n  box-shadow: 0px 0px 18px 12px #5ccbaf;\n  margin: 1.5rem 0; }\n"
+
+/***/ }),
+
+/***/ "./src/app/components/not-found/not-found.component.ts":
+/*!*************************************************************!*\
+  !*** ./src/app/components/not-found/not-found.component.ts ***!
+  \*************************************************************/
+/*! exports provided: NotFoundComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NotFoundComponent", function() { return NotFoundComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var NotFoundComponent = /** @class */ (function () {
+    function NotFoundComponent() {
+    }
+    NotFoundComponent.prototype.ngOnInit = function () {
+    };
+    NotFoundComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-not-found',
+            template: __webpack_require__(/*! ./not-found.component.html */ "./src/app/components/not-found/not-found.component.html"),
+            styles: [__webpack_require__(/*! ./not-found.component.sass */ "./src/app/components/not-found/not-found.component.sass")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], NotFoundComponent);
+    return NotFoundComponent;
 }());
 
 

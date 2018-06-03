@@ -14,6 +14,7 @@ import { AddLogComponent } from '../app/components/dashboard/add-log/add-log.com
 import { LogsContainerComponent } from '../app/components/dashboard/logs-container/logs-container.component';
 import { SearchComponent } from '../app/components/dashboard/logs-container/search/search.component';
 import { NotificationsComponent } from '../app/components/notifications/notifications.component';
+import { NotFoundComponent } from '../app/components/not-found/not-found.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { NotificationsComponent } from '../app/components/notifications/notifica
     NotificationsComponent,
     AddLogComponent,
     LogsContainerComponent,
-    SearchComponent
+    SearchComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -44,6 +46,7 @@ import { NotificationsComponent } from '../app/components/notifications/notifica
     FormsModule,
     HttpModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule]
+    BrowserAnimationsModule
+  ]
 })
 export class TestModule { }
