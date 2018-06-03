@@ -3,6 +3,9 @@ import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { LogsService } from '../../../services/logs.service';
 import { NotificationService } from '../../../services/notification.service';
 import { WeekPipe } from '../../../pipes/week.pipe';
+// import { NgRedux, select } from '@angular-redux/store';
+// import { IAppState } from '../../../store';
+// import { INCREMENT } from '../../../actions';
 
 @Component({
   selector: 'app-add-log',
@@ -12,6 +15,7 @@ import { WeekPipe } from '../../../pipes/week.pipe';
 })
 export class AddLogComponent implements OnInit {
   // showAddLog: boolean;
+  // @select() counter;
   formSuccesfullySubmited = false;
   updateLog: {};
   today = Date.now();
@@ -30,23 +34,30 @@ export class AddLogComponent implements OnInit {
   };
   alert = '';
 
-  constructor(private _logsService: LogsService, private _notificationService: NotificationService, private fb: FormBuilder, private weekPipe: WeekPipe) {
-    this.getAllLogs();
-   }
+  constructor(
+    private _logsService: LogsService,
+    private _notificationService: NotificationService,
+    private fb: FormBuilder, private weekPipe: WeekPipe,
+    ) {
+      // this.getAllLogs();
+    }
+    @Input() userIdofCurrent;
+    @Input() showAddLog: string;
+    @Output() selectStory = new EventEmitter<boolean>();
+    @Output() callFakeLogs = new EventEmitter<string>();
 
-  @Input() userIdofCurrent;
-  @Input() showAddLog: string;
-  @Output() selectStory = new EventEmitter<boolean>();
-  @Output() callFakeLogs = new EventEmitter<string>();
+  // increment() {
+  //   this.ngRedux.dispatch({ type: INCREMENT });
+  // }
   onSelectStory() {
     this.selectStory.emit(true);
   }
-  getAllLogs() {
-    this._logsService.getAllLogs(this.userIdofCurrent)
-      .subscribe((res) => {
-        this.logs = res;
-    });
-  }
+  // getAllLogs() {
+  //   this._logsService.getAllLogs(this.userIdofCurrent)
+  //     .subscribe((res) => {
+  //       this.logs = res;
+  //   });
+  // }
   onSubmit(f: FormGroup) {
     const type = f.value.type ? 'personal' : 'work';
     const week = f.value.week ? parseInt(f.value.week, 10) : this.weekPipe.transform(new Date(this.today));

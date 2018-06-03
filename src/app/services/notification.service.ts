@@ -1,6 +1,7 @@
+
+import {of as observableOf,  Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/of';
+
 
 @Injectable()
 export class NotificationService {
@@ -9,7 +10,7 @@ export class NotificationService {
    }
 
   getNotification() {
-    const alert = Observable.of(this.notification);
+    const alert = observableOf(this.notification);
     return alert;
   }
   showNotification(content) {

@@ -1,8 +1,10 @@
-import { Component, OnInit, Input,  } from '@angular/core';
+import { Component, OnInit, Input, } from '@angular/core';
 import { LogsService } from '../../../services/logs.service';
 import { NotificationService } from '../../../services/notification.service';
 import { easeInOut, expandCard } from '../../../animations';
-
+// import { NgRedux, select } from '@angular-redux/store';
+// import { IAppState } from '../../../store';
+// import { INCREMENT, FETCH_ALL_LOGS_ERROR, FETCH_ALL_LOGS_SUCCESS } from '../../../actions';
 
 @Component({
   selector: 'app-logs-container',
@@ -16,6 +18,8 @@ import { easeInOut, expandCard } from '../../../animations';
 export class LogsContainerComponent implements OnInit {
   @Input() showAddLog: string;
   @Input() userIdofCurrent;
+  // res: any;
+  // @select('task') logs;
   logs: Array<any>;
   currentShowbtn = 0;
   current = {
@@ -26,8 +30,8 @@ export class LogsContainerComponent implements OnInit {
   logToDeleteIndex: number;
   logToDeleteId: number;
   constructor(private _logsService: LogsService, private _notificationService: NotificationService) {
-     this.getAllLogs();
-   }
+    this.getAllLogs();
+  }
   /* Determines color of a card header based on type of a log */
   getClass(type) {
     if (type.type === 'personal') {
@@ -44,12 +48,16 @@ export class LogsContainerComponent implements OnInit {
     const d = ((1 + (w - 1) * 7)) + 6; // func  getDateOfWeek + 6 days
     return new Date(y, 0, d);
   }
+  // getAllLogs() {
+  //   this._logsService.getAllLogs(this.userIdofCurrent);
+  // }
   getAllLogs() {
     this.currentShowbtn = 0;
     this._logsService.getAllLogs(this.userIdofCurrent)
       .subscribe((res) => {
+        console.log(res);
         this.logs = res;
-        console.log(this.logs);
+        // console.log(this.logs);
         for (let i = 0; i < this.logs.length; i++) {
           this.logs[i].weekStart = this.getDateOfWeek(this.logs[i].week, 2017);
           this.logs[i].weekEnd = this.getEndingDateOfWeek(this.logs[i].week, 2017);
@@ -80,9 +88,10 @@ export class LogsContainerComponent implements OnInit {
   }
   showWorkLogs() {
     this.currentShowbtn = 1;
-    this._logsService.getWorkLogs(this.userIdofCurrent.userId)
-    .subscribe((res) => {
-      this.logs = res;
+    this._logsService.getWorkLogs(this.userIdofCurrent)
+      .subscribe((res) => {
+        console.log(res);
+        this.logs = res;
         for (let i = 0; i < this.logs.length; i++) {
           this.logs[i].weekStart = this.getDateOfWeek(this.logs[i].week, 2017);
           this.logs[i].weekEnd = this.getEndingDateOfWeek(this.logs[i].week, 2017);
@@ -98,8 +107,8 @@ export class LogsContainerComponent implements OnInit {
             this.logs[i].weekEntries = 1;
           }
         }
-  });
-}
+      });
+  }
   /* Shows confirmation window and stores index od wished number */
   initDelete(i, id) {
     this.showConfirmDelete = true;
@@ -116,9 +125,9 @@ export class LogsContainerComponent implements OnInit {
   }
   showPersonalLogs() {
     this.currentShowbtn = 2;
-    this._logsService.getPersonalLogs(this.userIdofCurrent.userId)
+    this._logsService.getPersonalLogs(this.userIdofCurrent)
       .subscribe((res) => {
-       this.logs = res;
+        this.logs = res;
         // console.log(res);
         for (let i = 0; i < this.logs.length; i++) {
           this.logs[i].weekStart = this.getDateOfWeek(this.logs[i].week, 2017);
@@ -160,11 +169,11 @@ export class LogsContainerComponent implements OnInit {
     }
   }
   ngOnInit() {
-    this._logsService.getBS()
-      .subscribe((res) => {
-        console.log(res.data);
-        this.getAllLogs();
-      });
+    // this._logsService.getBS()
+    //   .subscribe((res) => {
+    //     console.log(res);
+    //     this.showWorkLogs();
+    //   });
     // setTimeout(() => {
     //   this.getAllLogs();
     // }, 10000);

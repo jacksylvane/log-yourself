@@ -1,39 +1,49 @@
-// import { BrowserModule } from '@angular/platform-browser';
-// import { NgModule } from '@angular/core';
-// import { FormsModule } from '@angular/forms';
-// import { AppRoutingModule } from '../app/app-routing.module';
-// import { Pipe, PipeTransform } from '@angular/core';
-// import { AppComponent } from '../app/app.component';
-// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-// import { HttpModule } from '@angular/http';
-// import { LogsService } from '../app/services/logs.service';
-// import { ReactiveFormsModule } from '@angular/forms';
-// import { WeekPipe } from '../app/pipes/week.pipe';
-// import { NavbarComponent } from '../app/components/navbar/navbar.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule, Pipe, PipeTransform } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AppRoutingModule } from '../app/app-routing.module';
+import { AppComponent } from '../app/app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpModule } from '@angular/http';
+import { LogsService } from '../app/services/logs.service';
+import { WeekPipe } from '../app/pipes/week.pipe';
+import { FilterPipe } from '../app/pipes/search.pipe';
+import { NavbarComponent } from '../app/components/navbar/navbar.component';
+import { DashboardComponent } from '../app/components/dashboard/dashboard.component';
+import { AddLogComponent } from '../app/components/dashboard/add-log/add-log.component';
+import { LogsContainerComponent } from '../app/components/dashboard/logs-container/logs-container.component';
+import { SearchComponent } from '../app/components/dashboard/logs-container/search/search.component';
+import { NotificationsComponent } from '../app/components/notifications/notifications.component';
 
 
-// @NgModule({
-//   declarations: [
-//     AppComponent,
-//     WeekPipe,
-//     NavbarComponent
-//   ],
-//   imports: [
-//     BrowserModule,
-//     AppRoutingModule,
-//     FormsModule,
-//     HttpModule,
-//     ReactiveFormsModule,
-//     BrowserAnimationsModule
-//   ],
-//   providers: [LogsService],
-//   bootstrap: [AppComponent],
-//   exports: [BrowserModule,
-//     WeekPipe,
-//     AppRoutingModule,
-//     FormsModule,
-//     HttpModule,
-//     ReactiveFormsModule,
-//     BrowserAnimationsModule]
-// })
-// export class TestModule { }
+@NgModule({
+  declarations: [
+    AppComponent,
+    WeekPipe,
+    FilterPipe,
+    NavbarComponent,
+    DashboardComponent,
+    NotificationsComponent,
+    AddLogComponent,
+    LogsContainerComponent,
+    SearchComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule
+  ],
+  providers: [LogsService],
+  bootstrap: [AppComponent],
+  exports: [BrowserModule,
+    WeekPipe,
+    AppRoutingModule,
+    FormsModule,
+    HttpModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule]
+})
+export class TestModule { }

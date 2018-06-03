@@ -1,0 +1,3 @@
+// export const INCREMENT = 'INCREMENT';
+// export const FETCH_ALL_LOGS_SUCCESS = 'FETCH_ALL_LOGS_SUCCESS';
+// export const FETCH_ALL_LOGS_ERROR = 'FETCH_ALL_LOGS_ERROR';
