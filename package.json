@@ -10,13 +10,13 @@
     "lint": "ng lint",
     "e2e": "testcafe chrome index.js",
     "ndm": "mongod",
-    "testcafe" : "testcafe chrome index.js -s test-results"
+    "testcafe": "testcafe chrome index.js -s test-results"
   },
   "private": true,
   "dependencies": {
     "@angular-devkit/build-angular": "~0.6.3",
     "@angular-devkit/build-optimizer": "^0.6.3",
-    "@angular-redux/store": "^7.1.1",
+    "@angular-redux/store": "^9.0.0",
     "@angular/animations": "^6.0.3",
     "@angular/common": "^6.0.3",
     "@angular/compiler": "^6.0.3",

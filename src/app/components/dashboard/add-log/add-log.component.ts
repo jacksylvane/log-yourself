@@ -3,9 +3,9 @@ import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { LogsService } from '../../../services/logs.service';
 import { NotificationService } from '../../../services/notification.service';
 import { WeekPipe } from '../../../pipes/week.pipe';
-// import { NgRedux, select } from '@angular-redux/store';
-// import { IAppState } from '../../../store';
-// import { INCREMENT } from '../../../actions';
+import { NgRedux, select } from '@angular-redux/store';
+import { IAppState } from '../../../store';
+import { INCREMENT } from '../../../actions';
 
 @Component({
   selector: 'app-add-log',
@@ -15,7 +15,7 @@ import { WeekPipe } from '../../../pipes/week.pipe';
 })
 export class AddLogComponent implements OnInit {
   // showAddLog: boolean;
-  // @select() counter;
+  @select() counter;
   formSuccesfullySubmited = false;
   updateLog: {};
   today = Date.now();
@@ -38,6 +38,7 @@ export class AddLogComponent implements OnInit {
     private _logsService: LogsService,
     private _notificationService: NotificationService,
     private fb: FormBuilder, private weekPipe: WeekPipe,
+    private ngRedux: NgRedux<IAppState>
     ) {
       this.getAllLogs();
     }
@@ -46,9 +47,9 @@ export class AddLogComponent implements OnInit {
     @Output() selectStory = new EventEmitter<boolean>();
     @Output() callFakeLogs = new EventEmitter<string>();
 
-  // increment() {
-  //   this.ngRedux.dispatch({ type: INCREMENT });
-  // }
+  increment() {
+    this.ngRedux.dispatch({ type: INCREMENT });
+  }
   onSelectStory() {
     this.selectStory.emit(true);
   }

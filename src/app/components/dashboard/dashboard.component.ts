@@ -3,9 +3,9 @@ import { LogsService } from '../../services/logs.service';
 import { easeInOut, expandCard } from '../../animations';
 import { WeekPipe } from '../../pipes/week.pipe';
 import { NavbarComponent } from '../navbar/navbar.component';
-// import { NgRedux, select } from '@angular-redux/store';
-// import { IAppState } from '../../store';
-// import { INCREMENT, FETCH_ALL_LOGS_ERROR, FETCH_ALL_LOGS_SUCCESS } from '../../actions';
+import { NgRedux, select } from '@angular-redux/store';
+import { IAppState } from '../../store';
+import { INCREMENT, FETCH_ALL_LOGS_ERROR, FETCH_ALL_LOGS_SUCCESS } from '../../actions';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,7 +19,7 @@ import { NavbarComponent } from '../navbar/navbar.component';
 })
 
 export class DashboardComponent implements OnInit {
-  // @select('counter') count;
+  @select('counter') count;
   today = Date.now();
   userIdofCurrent = '72315f';
   formSuccesfullySubmited = false;

@@ -23,6 +23,25 @@ webpackEmptyAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
 
 /***/ }),
 
+/***/ "./src/app/actions.ts":
+/*!****************************!*\
+  !*** ./src/app/actions.ts ***!
+  \****************************/
+/*! exports provided: INCREMENT, FETCH_ALL_LOGS_SUCCESS, FETCH_ALL_LOGS_ERROR */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "INCREMENT", function() { return INCREMENT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FETCH_ALL_LOGS_SUCCESS", function() { return FETCH_ALL_LOGS_SUCCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FETCH_ALL_LOGS_ERROR", function() { return FETCH_ALL_LOGS_ERROR; });
+var INCREMENT = 'INCREMENT';
+var FETCH_ALL_LOGS_SUCCESS = 'FETCH_ALL_LOGS_SUCCESS';
+var FETCH_ALL_LOGS_ERROR = 'FETCH_ALL_LOGS_ERROR';
+
+
+/***/ }),
+
 /***/ "./src/app/animations.ts":
 /*!*******************************!*\
   !*** ./src/app/animations.ts ***!
@@ -265,11 +284,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_dashboard_logs_container_logs_container_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/dashboard/logs-container/logs-container.component */ "./src/app/components/dashboard/logs-container/logs-container.component.ts");
 /* harmony import */ var _components_dashboard_logs_container_search_search_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/dashboard/logs-container/search/search.component */ "./src/app/components/dashboard/logs-container/search/search.component.ts");
 /* harmony import */ var _components_not_found_not_found_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/not-found/not-found.component */ "./src/app/components/not-found/not-found.component.ts");
+/* harmony import */ var _angular_redux_store__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! @angular-redux/store */ "./node_modules/@angular-redux/store/lib/src/index.js");
+/* harmony import */ var _angular_redux_store__WEBPACK_IMPORTED_MODULE_20___default = /*#__PURE__*/__webpack_require__.n(_angular_redux_store__WEBPACK_IMPORTED_MODULE_20__);
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./store */ "./src/app/store.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
 
@@ -292,10 +317,11 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
-// import { NgRedux, NgReduxModule } from '@angular-redux/store';
-// import { IAppState, rootReducer, INITIAL_STATE } from './store';
+
+
 var AppModule = /** @class */ (function () {
-    function AppModule() {
+    function AppModule(ngRedux) {
+        ngRedux.configureStore(_store__WEBPACK_IMPORTED_MODULE_21__["rootReducer"], _store__WEBPACK_IMPORTED_MODULE_21__["INITIAL_STATE"]);
     }
     AppModule = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
@@ -318,14 +344,15 @@ var AppModule = /** @class */ (function () {
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_7__["HttpClientModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_2__["ReactiveFormsModule"],
                 _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_6__["BrowserAnimationsModule"],
-                // NgReduxModule,
+                _angular_redux_store__WEBPACK_IMPORTED_MODULE_20__["NgReduxModule"],
                 _angular_service_worker__WEBPACK_IMPORTED_MODULE_12__["ServiceWorkerModule"].register('/ngsw-worker.js', {
                     enabled: _environments_environment__WEBPACK_IMPORTED_MODULE_13__["environment"].production
                 })
             ],
             providers: [_services_logs_service__WEBPACK_IMPORTED_MODULE_8__["LogsService"], _services_notification_service__WEBPACK_IMPORTED_MODULE_15__["NotificationService"]],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"]]
-        })
+        }),
+        __metadata("design:paramtypes", [_angular_redux_store__WEBPACK_IMPORTED_MODULE_20__["NgRedux"]])
     ], AppModule);
     return AppModule;
 }());
@@ -341,7 +368,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "  <div class=\"addLog-header card-header\" (click)=\"onSelectStory()\" id=\"addLog\"> Add entry</div>\r\n  <form *ngIf=\"showAddLog\" [formGroup]=\"myForm\" (ngSubmit)=\"onSubmit(myForm)\">\r\n    <div id=\"inputsContainer\" >\r\n      <div class=\"type\">\r\n        Type:\r\n        <div class=\"checkboxThree\">\r\n          <input type=\"checkbox\" formControlName=\"type\" id=\"checkboxThreeInput\" />\r\n          <label for=\"checkboxThreeInput\">\r\n          </label>\r\n        </div>\r\n      </div>\r\n      <div class=\"date\">\r\n        <div>\r\n          <label for=\"week\">Week:</label>\r\n          <input type=\"text\" formControlName=\"week\" placeholder=\"{{today | week }}\">\r\n          <div class=\"maxValue-alert\" *ngIf=\"myForm.get('week').hasError('max')\">\r\n            There are only 52 weeks in a year.\r\n          </div>\r\n        </div>\r\n        <div>\r\n          <label for=\"day\">Day:</label>\r\n          <input type=\"text\" formControlName=\"day\" [(ngModel)]=addLog.day>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"textInput\">\r\n      <textarea type=\"text\" formControlName=\"text\" [(ngModel)]=addLog.text id=\"text\"></textarea>\r\n      <div class=\"fillAlert\" *ngIf=\"myForm.get('text').hasError('required') && myForm.get('text').touched\">Please fill out text area with your lovely words.</div>\r\n    </div>\r\n    <div class=\"btn-div\">\r\n      <button type=\"submit\" class=\"btn submit-btn\" [disabled]=\"!myForm.valid\" [class.disabled]=\"!myForm.valid\">Submit</button>\r\n      <!-- <button type=\"button\" class=\"btn\" (click)=\"increment()\">SubmitFake</button>\r\n      <p>Counter : {{counter | async}}</p> -->\r\n    </div>\r\n  </form>"
+module.exports = "  <div class=\"addLog-header card-header\" (click)=\"onSelectStory()\" id=\"addLog\"> Add entry</div>\r\n  <form *ngIf=\"showAddLog\" [formGroup]=\"myForm\" (ngSubmit)=\"onSubmit(myForm)\">\r\n    <div id=\"inputsContainer\" >\r\n      <div class=\"type\">\r\n        Type:\r\n        <div class=\"checkboxThree\">\r\n          <input type=\"checkbox\" formControlName=\"type\" id=\"checkboxThreeInput\" />\r\n          <label for=\"checkboxThreeInput\">\r\n          </label>\r\n        </div>\r\n      </div>\r\n      <div class=\"date\">\r\n        <div>\r\n          <label for=\"week\">Week:</label>\r\n          <input type=\"text\" formControlName=\"week\" placeholder=\"{{today | week }}\">\r\n          <div class=\"maxValue-alert\" *ngIf=\"myForm.get('week').hasError('max')\">\r\n            There are only 52 weeks in a year.\r\n          </div>\r\n        </div>\r\n        <div>\r\n          <label for=\"day\">Day:</label>\r\n          <input type=\"text\" formControlName=\"day\" [(ngModel)]=addLog.day>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"textInput\">\r\n      <textarea type=\"text\" formControlName=\"text\" [(ngModel)]=addLog.text id=\"text\"></textarea>\r\n      <div class=\"fillAlert\" *ngIf=\"myForm.get('text').hasError('required') && myForm.get('text').touched\">Please fill out text area with your lovely words.</div>\r\n    </div>\r\n    <div class=\"btn-div\">\r\n      <button type=\"submit\" class=\"btn submit-btn\" [disabled]=\"!myForm.valid\" [class.disabled]=\"!myForm.valid\">Submit</button>\r\n      <button type=\"button\" class=\"btn\" (click)=\"increment()\">SubmitFake</button>\r\n      <p>Counter : {{counter | async}}</p>\r\n    </div>\r\n  </form>"
 
 /***/ }),
 
@@ -371,6 +398,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_logs_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../services/logs.service */ "./src/app/services/logs.service.ts");
 /* harmony import */ var _services_notification_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../services/notification.service */ "./src/app/services/notification.service.ts");
 /* harmony import */ var _pipes_week_pipe__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../pipes/week.pipe */ "./src/app/pipes/week.pipe.ts");
+/* harmony import */ var _angular_redux_store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular-redux/store */ "./node_modules/@angular-redux/store/lib/src/index.js");
+/* harmony import */ var _angular_redux_store__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_angular_redux_store__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../actions */ "./src/app/actions.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -385,17 +415,15 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
-// import { NgRedux, select } from '@angular-redux/store';
-// import { IAppState } from '../../../store';
-// import { INCREMENT } from '../../../actions';
+
+
 var AddLogComponent = /** @class */ (function () {
-    function AddLogComponent(_logsService, _notificationService, fb, weekPipe) {
+    function AddLogComponent(_logsService, _notificationService, fb, weekPipe, ngRedux) {
         this._logsService = _logsService;
         this._notificationService = _notificationService;
         this.fb = fb;
         this.weekPipe = weekPipe;
-        // showAddLog: boolean;
-        // @select() counter;
+        this.ngRedux = ngRedux;
         this.formSuccesfullySubmited = false;
         this.today = Date.now();
         this.addLog = {
@@ -407,9 +435,9 @@ var AddLogComponent = /** @class */ (function () {
         this.callFakeLogs = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
         this.getAllLogs();
     }
-    // increment() {
-    //   this.ngRedux.dispatch({ type: INCREMENT });
-    // }
+    AddLogComponent.prototype.increment = function () {
+        this.ngRedux.dispatch({ type: _actions__WEBPACK_IMPORTED_MODULE_6__["INCREMENT"] });
+    };
     AddLogComponent.prototype.onSelectStory = function () {
         this.selectStory.emit(true);
     };
@@ -547,6 +575,10 @@ var AddLogComponent = /** @class */ (function () {
         });
     };
     __decorate([
+        Object(_angular_redux_store__WEBPACK_IMPORTED_MODULE_5__["select"])(),
+        __metadata("design:type", Object)
+    ], AddLogComponent.prototype, "counter", void 0);
+    __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
         __metadata("design:type", Object)
     ], AddLogComponent.prototype, "userIdofCurrent", void 0);
@@ -571,7 +603,8 @@ var AddLogComponent = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [_services_logs_service__WEBPACK_IMPORTED_MODULE_2__["LogsService"],
             _services_notification_service__WEBPACK_IMPORTED_MODULE_3__["NotificationService"],
-            _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormBuilder"], _pipes_week_pipe__WEBPACK_IMPORTED_MODULE_4__["WeekPipe"]])
+            _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormBuilder"], _pipes_week_pipe__WEBPACK_IMPORTED_MODULE_4__["WeekPipe"],
+            _angular_redux_store__WEBPACK_IMPORTED_MODULE_5__["NgRedux"]])
     ], AddLogComponent);
     return AddLogComponent;
 }());
@@ -587,7 +620,7 @@ var AddLogComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<app-navbar></app-navbar>\r\n<div class=\"container\">\r\n  <app-add-log \r\n    class=\"addLog card\" \r\n    [class.tiny]=\"!showAddLog\"\r\n    (selectStory)=\"getStory($event)\"\r\n    (callFakeLogs)=\"callGetFakeLogs($event)\"\r\n    [showAddLog]=\"showAddLog\"\r\n    [userIdofCurrent]=\"userIdofCurrent\"\r\n  ></app-add-log>\r\n  <!-- <p>Counter : {{count | async }}</p> -->\r\n  <app-logs-container\r\n   class=\"logs-container\"\r\n   [showAddLog]=\"showAddLog\"\r\n   [class.giant]=\"!showAddLog\"\r\n   [userIdofCurrent]=\"userIdofCurrent\"\r\n  ></app-logs-container>\r\n</div>\r\n\r\n<!-- <div \r\n @easeInOut\r\n*ngIf=\"formSuccesfullySubmited\" class=\"alert\" id=\"alert\">\r\n {{alert}}\r\n</div> -->\r\n"
+module.exports = "<app-navbar></app-navbar>\r\n<div class=\"container\">\r\n  <app-add-log \r\n    class=\"addLog card\" \r\n    [class.tiny]=\"!showAddLog\"\r\n    (selectStory)=\"getStory($event)\"\r\n    (callFakeLogs)=\"callGetFakeLogs($event)\"\r\n    [showAddLog]=\"showAddLog\"\r\n    [userIdofCurrent]=\"userIdofCurrent\"\r\n  ></app-add-log>\r\n  <p>Counter : {{count | async }}</p>\r\n  <app-logs-container\r\n   class=\"logs-container\"\r\n   [showAddLog]=\"showAddLog\"\r\n   [class.giant]=\"!showAddLog\"\r\n   [userIdofCurrent]=\"userIdofCurrent\"\r\n  ></app-logs-container>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -616,6 +649,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_logs_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/logs.service */ "./src/app/services/logs.service.ts");
 /* harmony import */ var _animations__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../animations */ "./src/app/animations.ts");
 /* harmony import */ var _pipes_week_pipe__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../pipes/week.pipe */ "./src/app/pipes/week.pipe.ts");
+/* harmony import */ var _angular_redux_store__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular-redux/store */ "./node_modules/@angular-redux/store/lib/src/index.js");
+/* harmony import */ var _angular_redux_store__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_angular_redux_store__WEBPACK_IMPORTED_MODULE_4__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -629,14 +664,11 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
-// import { NgRedux, select } from '@angular-redux/store';
-// import { IAppState } from '../../store';
-// import { INCREMENT, FETCH_ALL_LOGS_ERROR, FETCH_ALL_LOGS_SUCCESS } from '../../actions';
+
 var DashboardComponent = /** @class */ (function () {
     function DashboardComponent(_logsService, weekPipe) {
         this._logsService = _logsService;
         this.weekPipe = weekPipe;
-        // @select('counter') count;
         this.today = Date.now();
         this.userIdofCurrent = '72315f';
         this.formSuccesfullySubmited = false;
@@ -705,6 +737,10 @@ var DashboardComponent = /** @class */ (function () {
     };
     DashboardComponent.prototype.ngOnInit = function () {
     };
+    __decorate([
+        Object(_angular_redux_store__WEBPACK_IMPORTED_MODULE_4__["select"])('counter'),
+        __metadata("design:type", Object)
+    ], DashboardComponent.prototype, "count", void 0);
     DashboardComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-dashboard',
@@ -1512,6 +1548,33 @@ var NotificationService = /** @class */ (function () {
     return NotificationService;
 }());
 
+
+
+/***/ }),
+
+/***/ "./src/app/store.ts":
+/*!**************************!*\
+  !*** ./src/app/store.ts ***!
+  \**************************/
+/*! exports provided: INITIAL_STATE, rootReducer */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "INITIAL_STATE", function() { return INITIAL_STATE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "rootReducer", function() { return rootReducer; });
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./actions */ "./src/app/actions.ts");
+
+var INITIAL_STATE = {
+    counter: 0,
+};
+function rootReducer(state, action) {
+    switch (action.type) {
+        case _actions__WEBPACK_IMPORTED_MODULE_0__["INCREMENT"]: return { counter: state.counter + 5 };
+        case _actions__WEBPACK_IMPORTED_MODULE_0__["FETCH_ALL_LOGS_ERROR"]: return { counter: state.counter + 15 };
+    }
+    return state;
+}
 
 
 /***/ }),
